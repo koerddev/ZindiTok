@@ -583,57 +583,27 @@
         }
 
         let currentIndex = getInitialIndex();
-        let isMuted = localStorage.getItem('zinditok_muted') !== 'false';
         const hlsInstances = new Map();
 
         const appContainer = document.getElementById('app');
 
-        // Always guarantees the video actually starts playing. Browsers will
-        // reliably autoplay muted video, but often silently block unmuted
-        // autoplay - especially on mobile, where scrolling to a new video
-        // doesn't count as a "user gesture" for audio. If that happens, this
-        // falls back to muted playback for THIS video only - it never
-        // touches the user's saved sound preference, so it won't keep
-        // re-muting on every subsequent scroll.
+        // Every scroll-triggered channel switch always starts muted. Mobile
+        // browsers reliably block unmuted autoplay that isn't tied to a
+        // direct tap anyway, so attempting it here just caused mute/pause
+        // glitches. Sound only ever turns on through a real tap (below).
         function attemptAutoplay(video, index) {
             const pauseIcon = document.getElementById(`pause-${index}`);
             if (pauseIcon) pauseIcon.style.display = 'none';
 
-            video.muted = isMuted;
+            video.muted = true;
             video.volume = 1.0;
-            const playPromise = video.play();
-            if (playPromise !== undefined) {
-                playPromise.catch((err) => {
-                    // Fast scrolling causes play() to get interrupted by a
-                    // pause() call a moment later (the browser throws
-                    // AbortError here) - that's not a real autoplay-policy
-                    // block, so ignore it entirely rather than force-muting.
-                    if (err && err.name === 'AbortError') return;
+            video.play().catch(err => console.log("Autoplay blocked:", err));
 
-                    // By the time this fires, the user may have already
-                    // scrolled past this channel - don't touch anything on
-                    // behalf of a channel that's no longer active.
-                    if (index !== currentIndex) return;
-
-                    // A genuine autoplay-with-sound block. Fall back to
-                    // muted so playback still starts, but only for this one
-                    // video - the saved preference (isMuted / localStorage)
-                    // is left untouched so it doesn't spiral into re-muting
-                    // every channel for the rest of the session.
-                    video.muted = true;
-                    video.play().catch(err2 => console.log("Autoplay still blocked:", err2));
-
-                    if (!isMuted) {
-                        // Reflect the temporary local mute on just this tile,
-                        // without flipping the global preference/icon state.
-                        const overlay = document.getElementById(`unmute-overlay-${index}`);
-                        if (overlay) overlay.style.display = 'flex';
-                        const container = video.closest('.channel-container');
-                        const icon = container && container.querySelector('.mute-btn-icon');
-                        if (icon) icon.innerHTML = '🔇';
-                    }
-                });
-            }
+            const overlay = document.getElementById(`unmute-overlay-${index}`);
+            if (overlay) overlay.style.display = 'flex';
+            const container = video.closest('.channel-container');
+            const icon = container && container.querySelector('.mute-btn-icon');
+            if (icon) icon.innerHTML = '🔇';
         }
 
         function initDOM() {
@@ -667,7 +637,7 @@
 
                 const muteBtn = isIframe ? '' : `
                         <button class="sidebar-btn mute-btn-icon" onclick="toggleMute(event)" title="Toggle Sound" aria-label="Toggle sound">
-                            ${isMuted ? '🔇' : '🔊'}
+                            🔇
                         </button>`;
 
                 const installBtn = `
@@ -678,7 +648,7 @@
                         </button>`;
 
                 const unmuteOverlay = isIframe ? '' : `
-                    <div class="status-overlay unmute-overlay" id="unmute-overlay-${i}" style="display: ${isMuted ? 'flex' : 'none'};">
+                    <div class="status-overlay unmute-overlay" id="unmute-overlay-${i}" style="display: flex;">
                         <button class="unmute-btn" onclick="toggleMute(event)">Tap to Unmute</button>
                     </div>`;
 
@@ -915,25 +885,26 @@
             document.getElementById(`container-${index}`).scrollIntoView({ behavior: 'smooth' });
         }
 
-        function updateMuteUI() {
-            document.querySelectorAll('.mute-btn-icon').forEach(icon => {
-                icon.innerHTML = isMuted ? '🔇' : '🔊';
-            });
-            document.querySelectorAll('.unmute-overlay').forEach(overlay => {
-                overlay.style.display = isMuted ? 'flex' : 'none';
-            });
-        }
-
         function toggleMute(event) {
             if (event) event.stopPropagation();
-            isMuted = !isMuted;
-            localStorage.setItem('zinditok_muted', isMuted);
-            const activeVideo = document.getElementById(`video-${currentIndex}`);
-            if (activeVideo && activeVideo.tagName !== 'IFRAME') {
-                activeVideo.muted = isMuted;
-                activeVideo.volume = 1.0;
+            const video = document.getElementById(`video-${currentIndex}`);
+            if (!video || video.tagName === 'IFRAME') return;
+
+            video.muted = !video.muted;
+            video.volume = 1.0;
+            if (!video.muted) {
+                // This runs directly inside a real click/tap handler, so
+                // browsers reliably allow it - unlike the scroll-triggered
+                // attempt in attemptAutoplay().
+                video.play().catch(err => console.log("Play blocked:", err));
             }
-            updateMuteUI();
+
+            const container = video.closest('.channel-container');
+            const icon = container && container.querySelector('.mute-btn-icon');
+            if (icon) icon.innerHTML = video.muted ? '🔇' : '🔊';
+
+            const overlay = document.getElementById(`unmute-overlay-${currentIndex}`);
+            if (overlay) overlay.style.display = video.muted ? 'flex' : 'none';
         }
 
         function handleContainerClick() {
