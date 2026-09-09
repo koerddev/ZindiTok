@@ -577,33 +577,61 @@
                 }
             }
 
-            // No share link - always start at the very first channel (the
-            // top), rather than resuming wherever the user left off.
-            return 0;
+            // No share link - resume whichever channel was last watched, if any.
+            const lastChannelId = parseInt(localStorage.getItem('zinditok_last_channel'));
+            if (!isNaN(lastChannelId)) {
+                const lastPos = uniqueChannels.findIndex(c => c.id === lastChannelId);
+                if (lastPos !== -1) {
+                    return middleBlock + lastPos;
+                }
+            }
+
+            return middleBlock;
         }
 
         let currentIndex = getInitialIndex();
+        let isMuted = localStorage.getItem('zinditok_muted') !== 'false';
         const hlsInstances = new Map();
 
         const appContainer = document.getElementById('app');
 
-        // Every scroll-triggered channel switch always starts muted. Mobile
-        // browsers reliably block unmuted autoplay that isn't tied to a
-        // direct tap anyway, so attempting it here just caused mute/pause
-        // glitches. Sound only ever turns on through a real tap (below).
+        // Always guarantees the video actually starts playing. Browsers will
+        // reliably autoplay muted video, but often silently block unmuted
+        // autoplay - so if the user's saved sound-on preference gets blocked,
+        // this falls back to muted (and re-shows the unmute button) rather
+        // than leaving the stream stuck paused.
         function attemptAutoplay(video, index) {
-            const pauseIcon = document.getElementById(`pause-${index}`);
-            if (pauseIcon) pauseIcon.style.display = 'none';
-
-            video.muted = true;
+            video.muted = isMuted;
             video.volume = 1.0;
-            video.play().catch(err => console.log("Autoplay blocked:", err));
+            const playPromise = video.play();
+            if (playPromise !== undefined) {
+                playPromise.catch((err) => {
+                    // Fast scrolling causes play() to get interrupted by a
+                    // pause() call a moment later (the browser throws
+                    // AbortError here) - that's not a real autoplay-policy
+                    // block, so ignore it entirely rather than force-muting.
+                    if (err && err.name === 'AbortError') return;
 
-            const overlay = document.getElementById(`unmute-overlay-${index}`);
-            if (overlay) overlay.style.display = 'flex';
-            const container = video.closest('.channel-container');
-            const icon = container && container.querySelector('.mute-btn-icon');
-            if (icon) icon.innerHTML = '🔇';
+                    // By the time this fires, the user may have already
+                    // scrolled past this channel - don't touch global mute
+                    // state on behalf of a channel that's no longer active.
+                    if (index !== currentIndex) return;
+
+                    // A genuine autoplay block (NotAllowedError, usually
+                    // because sound was on but no user gesture happened yet
+                    // this session) - fall back to muted so playback still
+                    // starts automatically.
+                    video.muted = true;
+                    video.play().catch(err2 => console.log("Autoplay still blocked:", err2));
+                    if (!isMuted) {
+                        isMuted = true;
+                        localStorage.setItem('zinditok_muted', 'true');
+                        updateMuteUI();
+                    }
+                    const overlay = document.getElementById(`unmute-overlay-${index}`);
+                    if (overlay) overlay.style.display = 'flex';
+                });
+            }
         }
 
         function initDOM() {
@@ -637,7 +665,7 @@
 
                 const muteBtn = isIframe ? '' : `
                         <button class="sidebar-btn mute-btn-icon" onclick="toggleMute(event)" title="Toggle Sound" aria-label="Toggle sound">
-                            🔇
+                            ${isMuted ? '🔇' : '🔊'}
                         </button>`;
 
                 const installBtn = `
@@ -648,7 +676,7 @@
                         </button>`;
 
                 const unmuteOverlay = isIframe ? '' : `
-                    <div class="status-overlay unmute-overlay" id="unmute-overlay-${i}" style="display: flex;">
+                    <div class="status-overlay unmute-overlay" id="unmute-overlay-${i}" style="display: ${isMuted ? 'flex' : 'none'};">
                         <button class="unmute-btn" onclick="toggleMute(event)">Tap to Unmute</button>
                     </div>`;
 
@@ -710,6 +738,21 @@
                     ${pauseOverlay}
                 `;
                 appContainer.appendChild(container);
+
+                if (!isIframe) {
+                    const videoEl = document.getElementById(`video-${i}`);
+                    const pauseIcon = document.getElementById(`pause-${i}`);
+                    // Only reveal the pause icon if this video is the one
+                    // actually on screen - the app also calls .pause() on
+                    // neighboring videos while scrolling, and we don't want
+                    // the icon flashing on those.
+                    videoEl.addEventListener('pause', () => {
+                        if (i === currentIndex) pauseIcon.style.display = 'flex';
+                    });
+                    videoEl.addEventListener('play', () => {
+                        pauseIcon.style.display = 'none';
+                    });
+                }
             }
         }
 
@@ -860,6 +903,8 @@
                             currentIndex = newIndex;
                             updatePlayers();
                             dismissSwipeHint();
+                            const channel = uniqueChannels[newIndex % uniqueChannels.length];
+                            localStorage.setItem('zinditok_last_channel', channel.id);
                         }
                     }
                 });
@@ -885,39 +930,31 @@
             document.getElementById(`container-${index}`).scrollIntoView({ behavior: 'smooth' });
         }
 
+        function updateMuteUI() {
+            document.querySelectorAll('.mute-btn-icon').forEach(icon => {
+                icon.innerHTML = isMuted ? '🔇' : '🔊';
+            });
+            document.querySelectorAll('.unmute-overlay').forEach(overlay => {
+                overlay.style.display = isMuted ? 'flex' : 'none';
+            });
+        }
+
         function toggleMute(event) {
             if (event) event.stopPropagation();
-            const video = document.getElementById(`video-${currentIndex}`);
-            if (!video || video.tagName === 'IFRAME') return;
-
-            video.muted = !video.muted;
-            video.volume = 1.0;
-            if (!video.muted) {
-                // This runs directly inside a real click/tap handler, so
-                // browsers reliably allow it - unlike the scroll-triggered
-                // attempt in attemptAutoplay().
-                video.play().catch(err => console.log("Play blocked:", err));
+            isMuted = !isMuted;
+            localStorage.setItem('zinditok_muted', isMuted);
+            const activeVideo = document.getElementById(`video-${currentIndex}`);
+            if (activeVideo && activeVideo.tagName !== 'IFRAME') {
+                activeVideo.muted = isMuted;
+                activeVideo.volume = 1.0;
             }
-
-            const container = video.closest('.channel-container');
-            const icon = container && container.querySelector('.mute-btn-icon');
-            if (icon) icon.innerHTML = video.muted ? '🔇' : '🔊';
-
-            const overlay = document.getElementById(`unmute-overlay-${currentIndex}`);
-            if (overlay) overlay.style.display = video.muted ? 'flex' : 'none';
+            updateMuteUI();
         }
 
         function handleContainerClick() {
             const video = document.getElementById(`video-${currentIndex}`);
             if (!video || video.tagName === 'IFRAME') return;
-            const pauseIcon = document.getElementById(`pause-${currentIndex}`);
-            if (video.paused) {
-                video.play().catch(err => console.log("Play blocked:", err));
-                if (pauseIcon) pauseIcon.style.display = 'none';
-            } else {
-                video.pause();
-                if (pauseIcon) pauseIcon.style.display = 'flex';
-            }
+            video.paused ? video.play() : video.pause();
         }
 
         function shareChannel(event, index) {
