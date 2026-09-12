@@ -667,6 +667,17 @@
                             </svg>
                         </button>`;
 
+                // Mini player = standard Picture-in-Picture API. Supported on
+                // desktop Chrome/Edge/Safari, Android Chrome, and iOS Safari -
+                // cross-origin iframes (CiraTV) can't use it, same as fullscreen.
+                const miniPlayerBtn = isIframe ? '' : `
+                        <button class="sidebar-btn" onclick="togglePiP(event, ${i})" title="Mini Player" aria-label="Toggle mini player">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="4" width="18" height="14" rx="2"/>
+                                <rect x="12" y="11" width="7" height="5" rx="1" fill="currentColor" stroke="none"/>
+                            </svg>
+                        </button>`;
+
                 const muteBtn = isIframe ? '' : `
                         <button class="sidebar-btn mute-btn-icon" onclick="toggleMute(event)" title="Toggle Sound" aria-label="Toggle sound">
                             ${isMuted ? '🔇' : '🔊'}
@@ -719,6 +730,7 @@
                         </a>
 
                         ${fullscreenBtn}
+                        ${miniPlayerBtn}
                         
                         <button class="sidebar-btn share-btn" onclick="shareChannel(event, ${i})" title="Share" aria-label="Share this channel">
                             <svg viewBox="0 0 24 24" fill="currentColor">
@@ -764,11 +776,21 @@
             if (event) event.stopPropagation();
             const video = document.getElementById(`video-${index}`);
             if (!video || video.tagName === 'IFRAME') return; // not supported cross-origin
-            
+
+            // iOS Safari (and every iOS browser, since Apple mandates WebKit)
+            // doesn't support the standard Fullscreen API on arbitrary
+            // elements - video.requestFullscreen() silently does nothing
+            // there. The only fullscreen entry point iOS actually offers is
+            // this video-specific native player.
+            if (typeof video.webkitEnterFullscreen === 'function') {
+                video.webkitEnterFullscreen();
+                return;
+            }
+
             if (!document.fullscreenElement) {
                 if (video.requestFullscreen) {
                     video.requestFullscreen();
-                } else if (video.webkitRequestFullscreen) { /* Safari */
+                } else if (video.webkitRequestFullscreen) { /* Safari (desktop) */
                     video.webkitRequestFullscreen();
                 } else if (video.msRequestFullscreen) { /* IE11 */
                     video.msRequestFullscreen();
@@ -777,6 +799,18 @@
                 if (document.exitFullscreen) {
                     document.exitFullscreen();
                 }
+            }
+        }
+
+        function togglePiP(event, index) {
+            if (event) event.stopPropagation();
+            const video = document.getElementById(`video-${index}`);
+            if (!video || video.tagName === 'IFRAME') return; // not supported cross-origin
+
+            if (document.pictureInPictureElement) {
+                document.exitPictureInPicture().catch(err => console.log("Exit mini player failed:", err));
+            } else if (document.pictureInPictureEnabled && video.requestPictureInPicture) {
+                video.requestPictureInPicture().catch(err => console.log("Mini player blocked:", err));
             }
         }
 
@@ -988,6 +1022,21 @@
                 case 'm': case 'M': toggleMute(); break;
                 case 'f': case 'F': toggleFullScreen(null, currentIndex); break;
             }
+        });
+
+        // Automatically pop into the mini player (Picture-in-Picture) the
+        // moment the app is backgrounded - switching apps, locking the
+        // screen, or closing the browser tab all fire this same event.
+        // Playback then keeps going in the floating window instead of
+        // stopping outright. Browsers close the mini player and restore the
+        // video inline automatically once you come back to the tab.
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState !== 'hidden') return;
+            const video = document.getElementById(`video-${currentIndex}`);
+            if (!video || video.tagName === 'IFRAME') return; // iframe channels can't use PiP
+            if (!document.pictureInPictureEnabled || document.pictureInPictureElement) return;
+            if (video.paused) return;
+            video.requestPictureInPicture().catch(err => console.log("Auto mini player blocked:", err));
         });
 
         initDOM();
