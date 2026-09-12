@@ -412,31 +412,24 @@
         // e.g. embed pages like ok.ru/videoembed/... . Everything without a `type`
         // is treated as a normal HLS video.
         const uniqueChannels = [
-            { id: 0, name: "Med Muzîk", category: "Music", url: "https://m3u8-proxy.koerdnederland.workers.dev/live3.m3u8", logo: "https://www.google.com/s2/favicons?sz=128&domain=medmuzik.tv", website: "http://medmuzik.tv/" },
+            { id: 0, name: "Med Muzîk", category: "Music", url: "https://m3u8-proxy.koerdnederland.workers.dev/live3.m3u8", logo: "https://www.google.com/s2/favicons?sz=128&domain=medmuzik.tv", website: "https://medmuzik.tv" },
             { id: 1, name: "StêrkTV", category: "News", url: "https://zindi.sterk.tv/live/sterk.m3u8", logo: "https://www.google.com/s2/favicons?sz=128&domain=sterk.tv", website: "https://sterk.tv" },
-            { id: 2, name: "JinTV", category: "By Women for Women, Women-focused Channel", url: "https://live.jintv.org/medialive/jintv.m3u8", logo: "https://www.google.com/s2/favicons?sz=128&domain=jintv.net", website: "https://jintv.net/" },
-            { id: 3, name: "RonahiTV", category: "News & Culture", url: "https://hlspackager.akamaized.net/live/DB/RONAHI_TV/HLS/RONAHI_TV.m3u8", logo: "https://www.google.com/s2/favicons?sz=128&domain=ronahi.tv", website: "https://ronahi.tv" },
-            { id: 4, name: "Nûçe TV", category: "News & Culture", url: "https://hlspackager.akamaized.net/live/DB/NU_TV/HLS/NU_TV.m3u8", logo: "https://www.google.com/s2/favicons?sz=128&domain=nucetv.net", website: "https://nucetv.net/" },
-            { id: 5, name: "Zagros24", category: "Rojhilat & Iran News", url: "https://hlspackager.akamaized.net/live/DB/ZAGROS_24/HLS/ZAGROS_24.m3u8", logo: "https://www.google.com/s2/favicons?sz=128&domain=zagros24.net", website: "https://zagros24.net/" },
-            { id: 6, name: "Rojava", category: "Rojava News & Culture", url: "https://hlspackager.akamaized.net/live/DB/ROJAVA_HD/HLS/ROJAVA_HD.m3u8", logo: "https://www.google.com/s2/favicons?sz=128&domain=rojavatv.net", website: "https://rojavatv.net" },
-            { id: 7, name: "ÇiraTV", category: "Ezidi News & Culture", type: "iframe", url: "https://ok.ru/videoembed/10267254464101?autoplay=1", logo: "https://www.google.com/s2/favicons?sz=128&domain=ciratv.com", website: "https://ciratv.com/" },
-            { id: 8, name: "İlke TV", category: "Bakur & Turkey News", url: "https://stream.ilketv.com.tr/hls/ilkecanli.m3u8", logo: "https://www.google.com/s2/favicons?sz=128&domain=ilketv.com.tr", website: "https://ilketv.com.tr/" },
-            { id: 9, name: "ZarokTV", category: "Children's Channel", url: "https://zindikurmanci.zaroktv.com.tr/hls/0/stream.m3u8", logo: "https://www.google.com/s2/favicons?sz=128&domain=zaroktv.com.tr", website: "https://zaroktv.com.tr/" },
+            { id: 2, name: "JinTV", category: "By Women for Women, Women-focused Channel", url: "https://live.jintv.org/medialive/jintv.m3u8", logo: "https://www.google.com/s2/favicons?sz=128&domain=jintv.org", website: "https://jintv.org" },
+            { id: 3, name: "RonahiTV", category: "News & Culture", url: "https://hlspackager.akamaized.net/live/DB/RONAHI_TV/HLS/RONAHI_TV.m3u8", logo: "https://www.google.com/s2/favicons?sz=128&domain=ronahitv.com", website: "https://ronahitv.com" },
+            { id: 4, name: "Nûçe TV", category: "News & Culture", url: "https://hlspackager.akamaized.net/live/DB/NU_TV/HLS/NU_TV.m3u8", logo: "https://www.google.com/s2/favicons?sz=128&domain=nucetv.com", website: "https://nucetv.com" },
+            { id: 5, name: "Zagros24", category: "Rojhilat & Iran News", url: "https://hlspackager.akamaized.net/live/DB/ZAGROS_24/HLS/ZAGROS_24.m3u8", logo: "https://www.google.com/s2/favicons?sz=128&domain=zagros24.net", website: "https://zagros24.net" },
+            { id: 6, name: "Rojava", category: "Rojava News & Culture", url: "https://hlspackager.akamaized.net/live/DB/ROJAVA_HD/HLS/ROJAVA_HD.m3u8", logo: "https://www.google.com/s2/favicons?sz=128&domain=rojavahaber.com", website: "https://rojavahaber.com" },
+            { id: 7, name: "ÇiraTV", category: "Ezidi News & Culture", type: "iframe", url: "https://ok.ru/videoembed/10267254464101?autoplay=1", logo: "https://www.google.com/s2/favicons?sz=128&domain=ok.ru", website: "https://ok.ru" },
+            { id: 8, name: "İlke TV", category: "Bakur & Turkey News", url: "https://stream.ilketv.com.tr/hls/ilkecanli.m3u8", logo: "https://www.google.com/s2/favicons?sz=128&domain=ilketv.com.tr", website: "https://ilketv.com.tr" },
+            { id: 9, name: "ZarokTV", category: "Children's Channel", url: "https://zindikurmanci.zaroktv.com.tr/hls/0/stream.m3u8", logo: "https://www.google.com/s2/favicons?sz=128&domain=zaroktv.com.tr", website: "https://zaroktv.com.tr" }
         ];
 
-        // Lower LOOP_MULTIPLIER = fewer DOM nodes rendered up front (faster
-        // first load), at the cost of the infinite-scroll illusion wrapping
-        // around sooner. 16 still allows ~70 scrolls in either direction
-        // before it loops - plenty for a normal session.
-        const LOOP_MULTIPLIER = 16; 
-        const TOTAL_RENDER_COUNT = uniqueChannels.length * LOOP_MULTIPLIER;
+        // Render only 3 blocks at a time (current + next + previous)
+        // This keeps DOM lightweight while maintaining infinite scroll
+        const VISIBLE_BLOCKS = 3;
+        let totalDOMChannels = uniqueChannels.length * VISIBLE_BLOCKS;
 
         // --- Install / Add-to-Home-Screen support ---
-        // Chrome/Edge (Windows, macOS, Android, ChromeOS) support a real,
-        // native "Install" prompt once a manifest + service worker are
-        // registered. iOS Safari and desktop Safari deliberately do NOT
-        // allow this to be triggered from JS - Apple requires the user to
-        // do it manually, so we detect those cases and show instructions.
         let deferredInstallPrompt = null;
 
         window.addEventListener('beforeinstallprompt', (e) => {
@@ -476,16 +469,12 @@
         async function handleInstallClick(event) {
             if (event) event.stopPropagation();
 
-            // Already installed / running as an installed app - nothing to do.
             if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
                 showInstallInstructions("Already Installed", "ZindîTok is already added to your device.", []);
                 return;
             }
 
             if (deferredInstallPrompt) {
-                // Real native install prompt - Chrome/Edge on Windows, macOS,
-                // Android, or ChromeOS. This is the actual "suiting button":
-                // no tutorial needed, the browser handles everything.
                 deferredInstallPrompt.prompt();
                 await deferredInstallPrompt.userChoice;
                 deferredInstallPrompt = null;
@@ -566,13 +555,10 @@
             }
         }
 
-        // Deep-linking: if the URL has ?channel=<id>, start on that channel
-        // (still placed in the middle loop-block so infinite scroll still works
-        // both up and down from the starting point).
         function getInitialIndex() {
             const params = new URLSearchParams(window.location.search);
             const channelId = parseInt(params.get('channel'));
-            const middleBlock = Math.floor(LOOP_MULTIPLIER / 2) * uniqueChannels.length;
+            const middleBlock = Math.floor(VISIBLE_BLOCKS / 2) * uniqueChannels.length;
 
             if (!isNaN(channelId)) {
                 const channelPos = uniqueChannels.findIndex(c => c.id === channelId);
@@ -581,7 +567,6 @@
                 }
             }
 
-            // No share link - resume whichever channel was last watched, if any.
             const lastChannelId = parseInt(localStorage.getItem('zinditok_last_channel'));
             if (!isNaN(lastChannelId)) {
                 const lastPos = uniqueChannels.findIndex(c => c.id === lastChannelId);
@@ -599,32 +584,16 @@
 
         const appContainer = document.getElementById('app');
 
-        // Always guarantees the video actually starts playing. Browsers will
-        // reliably autoplay muted video, but often silently block unmuted
-        // autoplay - so if the user's saved sound-on preference gets blocked,
-        // this falls back to muted (and re-shows the unmute button) rather
-        // than leaving the stream stuck paused.
         function attemptAutoplay(video, index) {
             video.muted = isMuted;
             video.volume = 1.0;
             const playPromise = video.play();
             if (playPromise !== undefined) {
                 playPromise.catch((err) => {
-                    // Fast scrolling causes play() to get interrupted by a
-                    // pause() call a moment later (the browser throws
-                    // AbortError here) - that's not a real autoplay-policy
-                    // block, so ignore it entirely rather than force-muting.
                     if (err && err.name === 'AbortError') return;
 
-                    // By the time this fires, the user may have already
-                    // scrolled past this channel - don't touch global mute
-                    // state on behalf of a channel that's no longer active.
                     if (index !== currentIndex) return;
 
-                    // A genuine autoplay block (NotAllowedError, usually
-                    // because sound was on but no user gesture happened yet
-                    // this session) - fall back to muted so playback still
-                    // starts automatically.
                     video.muted = true;
                     video.play().catch(err2 => console.log("Autoplay still blocked:", err2));
                     if (!isMuted) {
@@ -638,139 +607,158 @@
             }
         }
 
-        function initDOM() {
-            for (let i = 0; i < TOTAL_RENDER_COUNT; i++) {
-                const channel = uniqueChannels[i % uniqueChannels.length];
-                const isIframe = channel.type === 'iframe';
-                const container = document.createElement('div');
-                container.className = 'channel-container';
-                container.id = `container-${i}`;
-                
-                container.onclick = (e) => {
-                    if(e.target === container) handleContainerClick();
-                };
+        function createChannelElement(i) {
+            const channel = uniqueChannels[i % uniqueChannels.length];
+            const isIframe = channel.type === 'iframe';
+            const container = document.createElement('div');
+            container.className = 'channel-container';
+            container.id = `container-${i}`;
+            
+            container.onclick = (e) => {
+                if(e.target === container) handleContainerClick();
+            };
 
-                // pointer-events:none + tabindex="-1" stop this iframe from ever
-                // grabbing keyboard focus. Without this, clicking/interacting with
-                // the embedded ok.ru player hands your arrow-key presses to THEIR
-                // page instead of yours, which they use for volume instead of scroll.
-                const mediaElement = isIframe
-                    ? `<iframe id="video-${i}" src="" frameborder="0" allow="autoplay; fullscreen" allowfullscreen tabindex="-1" style="width:100%;height:100%;pointer-events:none;"></iframe>`
-                    : `<video id="video-${i}" playsinline loop></video>`;
+            const mediaElement = isIframe
+                ? `<iframe id="video-${i}" src="" frameborder="0" allow="autoplay; fullscreen" allowfullscreen tabindex="-1" style="width:100%;height:100%;pointer-events:none;"></iframe>`
+                : `<video id="video-${i}" playsinline loop></video>`;
 
-                // Fullscreen + mute controls don't work on cross-origin iframes
-                // (browser security), so they're omitted for iframe-type channels.
-                const fullscreenBtn = isIframe ? '' : `
-                        <button class="sidebar-btn" onclick="toggleFullScreen(event, ${i})" title="Fullscreen" aria-label="Toggle fullscreen">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
-                            </svg>
-                        </button>`;
-
-                const muteBtn = isIframe ? '' : `
-                        <button class="sidebar-btn mute-btn-icon" onclick="toggleMute(event)" title="Toggle Sound" aria-label="Toggle sound">
-                            ${isMuted ? '🔇' : '🔊'}
-                        </button>`;
-
-                const installBtn = `
-                        <button class="sidebar-btn" onclick="handleInstallClick(event)" title="Add to Home Screen" aria-label="Add to home screen">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/>
-                            </svg>
-                        </button>`;
-
-                const unmuteOverlay = isIframe ? '' : `
-                    <div class="status-overlay unmute-overlay" id="unmute-overlay-${i}" style="display: ${isMuted ? 'flex' : 'none'};">
-                        <button class="unmute-btn" onclick="toggleMute(event)">Tap to Unmute</button>
-                    </div>`;
-
-                // Shown only when the user explicitly pauses the currently
-                // active video (tap or spacebar) - not for background videos
-                // paused automatically while scrolling.
-                const pauseOverlay = isIframe ? '' : `
-                    <div class="status-overlay pause-overlay" id="pause-${i}">
-                        <svg viewBox="0 0 24 24" width="70" height="70" fill="rgba(255,255,255,0.9)">
-                            <circle cx="12" cy="12" r="12" fill="rgba(0,0,0,0.45)"/>
-                            <rect x="8" y="7" width="3" height="10" rx="1"/>
-                            <rect x="13" y="7" width="3" height="10" rx="1"/>
+            const fullscreenBtn = isIframe ? '' : `
+                    <button class="sidebar-btn" onclick="toggleFullScreen(event, ${i})" title="Fullscreen" aria-label="Toggle fullscreen">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
                         </svg>
-                    </div>`;
+                    </button>`;
 
-                container.innerHTML = `
-                    ${mediaElement}
+            const muteBtn = isIframe ? '' : `
+                    <button class="sidebar-btn mute-btn-icon" onclick="toggleMute(event)" title="Toggle Sound" aria-label="Toggle sound">
+                        ${isMuted ? '🔇' : '🔊'}
+                    </button>`;
+
+            const installBtn = `
+                    <button class="sidebar-btn" onclick="handleInstallClick(event)" title="Add to Home Screen" aria-label="Add to home screen">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/>
+                        </svg>
+                    </button>`;
+
+            const unmuteOverlay = isIframe ? '' : `
+                <div class="status-overlay unmute-overlay" id="unmute-overlay-${i}" style="display: ${isMuted ? 'flex' : 'none'};">
+                    <button class="unmute-btn" onclick="toggleMute(event)">Tap to Unmute</button>
+                </div>`;
+
+            const pauseOverlay = isIframe ? '' : `
+                <div class="status-overlay pause-overlay" id="pause-${i}">
+                    <svg viewBox="0 0 24 24" width="70" height="70" fill="rgba(255,255,255,0.9)">
+                        <circle cx="12" cy="12" r="12" fill="rgba(0,0,0,0.45)"/>
+                        <rect x="8" y="7" width="3" height="10" rx="1"/>
+                        <rect x="13" y="7" width="3" height="10" rx="1"/>
+                    </svg>
+                </div>`;
+
+            container.innerHTML = `
+                ${mediaElement}
+                
+                <div class="ui-layer">
                     
-                    <div class="ui-layer">
-                        
-                        <div class="top-ui">
-                            <div class="live-badge">
-                                Live <div class="live-dot"></div>
-                                
-                            </div>
-                        </div>
-                        <div class="bottom-ui">
-                            <div class="channel-name">${channel.name}</div>
-                            <div class="channel-category">${channel.category}</div>
+                    <div class="top-ui">
+                        <div class="live-badge">
+                            Live <div class="live-dot"></div>
+                            
                         </div>
                     </div>
-
-                    <div class="right-sidebar">
-                        <a href="${channel.website}" target="_blank" class="channel-logo-link" title="Visit Website" aria-label="Visit ${channel.name} website">
-                            <img src="${channel.logo}" alt="${channel.name} Logo" class="channel-logo" />
-                        </a>
-
-                        ${fullscreenBtn}
-                        
-                        <button class="sidebar-btn share-btn" onclick="shareChannel(event, ${i})" title="Share" aria-label="Share this channel">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M20.16 11.23l-7.5-6a1.5 1.5 0 00-2.43 1.17v3c-4.48.33-8.23 4.14-8.23 9.6 0 1.25.32 2.45.86 3.5a.5.5 0 00.86-.45c-.86-3.8.46-6.66 3.32-8.08 1.48-.74 3.03-1 4.54-1.11v3.42a1.5 1.5 0 002.43 1.17l7.5-6a1.5 1.5 0 000-2.34z" />
-                            </svg>
-                        </button>
-
-                        ${muteBtn}
-                        ${installBtn}
+                    <div class="bottom-ui">
+                        <div class="channel-name">${channel.name}</div>
+                        <div class="channel-category">${channel.category}</div>
                     </div>
+                </div>
 
-                    <div class="status-overlay" id="loading-${i}">
-                        <div class="spinner"></div>
-                    </div>
+                <div class="right-sidebar">
+                    <a href="${channel.website}" target="_blank" class="channel-logo-link" title="Visit Website" aria-label="Visit ${channel.name} website">
+                        <img src="${channel.logo}" alt="${channel.name} Logo" class="channel-logo" />
+                    </a>
 
-                    <div class="status-overlay" id="error-${i}">
-                        <div class="error-message">Stream Unavailable<br><small>Skipping...</small></div>
-                    </div>
+                    ${fullscreenBtn}
+                    
+                    <button class="sidebar-btn share-btn" onclick="shareChannel(event, ${i})" title="Share" aria-label="Share this channel">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20.16 11.23l-7.5-6a1.5 1.5 0 00-2.43 1.17v3c-4.48.33-8.23 4.14-8.23 9.6 0 1.25.32 2.45.86 3.5a.5.5 0 00.86-.45c-.86-3.8.46-6.66 3.32-8.08 1.48-.74 3.03-1 4.54 0 .9.4 1.74 1.06 2.5 1.9a8.05 8.05 0 011.18 3.08.5.5 0 00.63.37.5.5 0 00.36-.64 9.1 9.1 0 00-1.36-3.5c-1.02-1.3-2.25-2.3-3.62-2.85-1.37-.54-2.84-.6-4.27-.18-1.44.42-2.78 1.4-3.82 2.75"/>
+                        </svg>
+                    </button>
 
-                    ${unmuteOverlay}
-                    ${pauseOverlay}
-                `;
-                appContainer.appendChild(container);
+                    ${muteBtn}
+                    ${installBtn}
+                </div>
 
-                if (!isIframe) {
-                    const videoEl = document.getElementById(`video-${i}`);
-                    const pauseIcon = document.getElementById(`pause-${i}`);
-                    // Only reveal the pause icon if this video is the one
-                    // actually on screen - the app also calls .pause() on
-                    // neighboring videos while scrolling, and we don't want
-                    // the icon flashing on those.
-                    videoEl.addEventListener('pause', () => {
-                        if (i === currentIndex) pauseIcon.style.display = 'flex';
-                    });
-                    videoEl.addEventListener('play', () => {
-                        pauseIcon.style.display = 'none';
-                    });
-                }
+                <div class="status-overlay" id="loading-${i}">
+                    <div class="spinner"></div>
+                </div>
+
+                <div class="status-overlay" id="error-${i}">
+                    <div class="error-message">Stream Unavailable<br><small>Skipping...</small></div>
+                </div>
+
+                ${unmuteOverlay}
+                ${pauseOverlay}
+            `;
+            appContainer.appendChild(container);
+
+            if (!isIframe) {
+                const videoEl = document.getElementById(`video-${i}`);
+                const pauseIcon = document.getElementById(`pause-${i}`);
+                videoEl.addEventListener('pause', () => {
+                    if (i === currentIndex) pauseIcon.style.display = 'flex';
+                });
+                videoEl.addEventListener('play', () => {
+                    pauseIcon.style.display = 'none';
+                });
+            }
+        }
+
+        function ensureEnoughDOM(targetIndex) {
+            // If user is getting close to the end, add more DOM nodes
+            if (targetIndex > totalDOMChannels - uniqueChannels.length * 2) {
+                addMoreChannels(uniqueChannels.length * 2);
+            }
+            
+            // If scrolling up past the start, add to the beginning
+            if (targetIndex < uniqueChannels.length) {
+                addMoreChannelsAtStart(uniqueChannels.length * 2);
+            }
+        }
+
+        function addMoreChannels(count) {
+            for (let i = totalDOMChannels; i < totalDOMChannels + count; i++) {
+                createChannelElement(i);
+            }
+            totalDOMChannels += count;
+        }
+
+        function addMoreChannelsAtStart(count) {
+            for (let i = 0; i < count; i++) {
+                const element = document.createElement('div');
+                element.innerHTML = '';
+                appContainer.insertBefore(element, appContainer.firstChild);
+            }
+            totalDOMChannels += count;
+        }
+
+        function initDOM() {
+            for (let i = 0; i < totalDOMChannels; i++) {
+                createChannelElement(i);
             }
         }
 
         function toggleFullScreen(event, index) {
             if (event) event.stopPropagation();
             const video = document.getElementById(`video-${index}`);
-            if (!video || video.tagName === 'IFRAME') return; // not supported cross-origin
+            if (!video || video.tagName === 'IFRAME') return;
             
             if (!document.fullscreenElement) {
                 if (video.requestFullscreen) {
                     video.requestFullscreen();
-                } else if (video.webkitRequestFullscreen) { /* Safari */
+                } else if (video.webkitRequestFullscreen) {
                     video.webkitRequestFullscreen();
-                } else if (video.msRequestFullscreen) { /* IE11 */
+                } else if (video.msRequestFullscreen) {
                     video.msRequestFullscreen();
                 }
             } else {
@@ -781,14 +769,11 @@
         }
 
         function updatePlayers() {
-            for (let i = 0; i < TOTAL_RENDER_COUNT; i++) {
+            for (let i = 0; i < totalDOMChannels; i++) {
                 const channel = uniqueChannels[i % uniqueChannels.length];
                 const distance = Math.abs(i - currentIndex);
 
                 if (channel.type === 'iframe') {
-                    // Iframes autoplay with sound the instant their src is set and
-                    // can't be muted/paused cross-origin, so only ever load the
-                    // exact channel on screen - never preload it as a neighbor.
                     if (i === currentIndex) {
                         loadVideo(i);
                     } else {
@@ -804,10 +789,10 @@
                 }
             }
 
-            for (let i = Math.max(0, currentIndex - 1); i <= Math.min(TOTAL_RENDER_COUNT - 1, currentIndex + 1); i++) {
+            for (let i = Math.max(0, currentIndex - 1); i <= Math.min(totalDOMChannels - 1, currentIndex + 1); i++) {
                 const video = document.getElementById(`video-${i}`);
                 if (!video) continue;
-                if (video.tagName === 'IFRAME') continue; // iframe handles its own playback via autoplay=1
+                if (video.tagName === 'IFRAME') continue;
 
                 if (i === currentIndex) {
                     attemptAutoplay(video, i);
@@ -825,18 +810,14 @@
 
             if (channel.type === 'iframe') {
                 errorUI.style.display = 'none';
-                loadingUI.style.display = 'none'; // can't detect real load state cross-origin
-                if (video.getAttribute('src')) return; // already loaded, don't re-trigger
+                loadingUI.style.display = 'none';
+                if (video.getAttribute('src')) return;
                 video.src = channel.url;
                 return;
             }
 
-            // Already loading/loaded via hls.js - don't touch the UI again,
-            // this is what was causing the spinner to reappear on channels
-            // you'd already watched.
             if (hlsInstances.has(index)) return;
 
-            // Native HLS (Safari) - same guard, keyed off the src attribute instead.
             if (!Hls.isSupported() && video.getAttribute('src')) return;
 
             errorUI.style.display = 'none';
@@ -905,6 +886,10 @@
                             const oldPauseIcon = document.getElementById(`pause-${currentIndex}`);
                             if (oldPauseIcon) oldPauseIcon.style.display = 'none';
                             currentIndex = newIndex;
+                            
+                            // Check if we need more DOM nodes
+                            ensureEnoughDOM(newIndex);
+                            
                             updatePlayers();
                             dismissSwipeHint();
                             const channel = uniqueChannels[newIndex % uniqueChannels.length];
@@ -930,7 +915,7 @@
         }
 
         function scrollToIndex(index) {
-            if (index < 0 || index >= TOTAL_RENDER_COUNT) return;
+            if (index < 0 || index >= totalDOMChannels) return;
             document.getElementById(`container-${index}`).scrollIntoView({ behavior: 'smooth' });
         }
 
