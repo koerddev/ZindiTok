@@ -673,8 +673,8 @@
                 const miniPlayerBtn = isIframe ? '' : `
                         <button class="sidebar-btn" onclick="togglePiP(event, ${i})" title="Mini Player" aria-label="Toggle mini player">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="3" y="4" width="18" height="14" rx="2"/>
-                                <rect x="12" y="11" width="7" height="5" rx="1" fill="currentColor" stroke="none"/>
+                                <rect x="3" y="5" width="18" height="13" rx="2"/>
+                                <rect x="13" y="12" width="9" height="7" rx="1.5" fill="currentColor" stroke="none"/>
                             </svg>
                         </button>`;
 
@@ -781,7 +781,11 @@
             // doesn't support the standard Fullscreen API on arbitrary
             // elements - video.requestFullscreen() silently does nothing
             // there. The only fullscreen entry point iOS actually offers is
-            // this video-specific native player.
+            // this video-specific native player - which, like the YouTube
+            // app, automatically presents landscape video sideways on its
+            // own without needing the phone physically rotated. That
+            // rotation is an OS-level behavior tied to this exact API and
+            // isn't something extra JS can add to or improve on iOS.
             if (typeof video.webkitEnterFullscreen === 'function') {
                 video.webkitEnterFullscreen();
                 return;
@@ -795,6 +799,11 @@
                 } else if (video.msRequestFullscreen) { /* IE11 */
                     video.msRequestFullscreen();
                 }
+                // Android Chrome/Edge support forcing landscape on entering
+                // fullscreen. No-ops harmlessly anywhere it isn't supported.
+                if (screen.orientation && screen.orientation.lock) {
+                    screen.orientation.lock('landscape').catch(() => {});
+                }
             } else {
                 if (document.exitFullscreen) {
                     document.exitFullscreen();
@@ -807,10 +816,21 @@
             const video = document.getElementById(`video-${index}`);
             if (!video || video.tagName === 'IFRAME') return; // not supported cross-origin
 
+            // iOS Safari never adopted the standard Picture-in-Picture spec
+            // (requestPictureInPicture/pictureInPictureEnabled) - it only
+            // exposes this older, WebKit-only presentation-mode API instead.
+            if (typeof video.webkitSupportsPresentationMode === 'function' &&
+                video.webkitSupportsPresentationMode('picture-in-picture')) {
+                const isInPiP = video.webkitPresentationMode === 'picture-in-picture';
+                video.webkitSetPresentationMode(isInPiP ? 'inline' : 'picture-in-picture');
+                return;
+            }
+
+            // Standard Picture-in-Picture API (Chrome, Edge, desktop Safari, Android Chrome)
             if (document.pictureInPictureElement) {
                 document.exitPictureInPicture().catch(err => console.log("Exit mini player failed:", err));
-            } else if (document.pictureInPictureEnabled && video.requestPictureInPicture) {
-                video.requestPictureInPicture().catch(err => console.log("Mini player blocked:", err));
+            } else {
+                enterPiP(video);
             }
         }
 
@@ -1030,13 +1050,28 @@
         // Playback then keeps going in the floating window instead of
         // stopping outright. Browsers close the mini player and restore the
         // video inline automatically once you come back to the tab.
+        // Shared by the mini player button and the auto-trigger below -
+        // tries the standard API first, falling back to iOS Safari's
+        // WebKit-only presentation-mode API.
+        function enterPiP(video) {
+            if (typeof video.webkitSupportsPresentationMode === 'function' &&
+                video.webkitSupportsPresentationMode('picture-in-picture')) {
+                if (video.webkitPresentationMode !== 'picture-in-picture') {
+                    video.webkitSetPresentationMode('picture-in-picture');
+                }
+                return;
+            }
+            if (document.pictureInPictureEnabled && !document.pictureInPictureElement && video.requestPictureInPicture) {
+                video.requestPictureInPicture().catch(err => console.log("Mini player blocked:", err));
+            }
+        }
+
         document.addEventListener('visibilitychange', () => {
             if (document.visibilityState !== 'hidden') return;
             const video = document.getElementById(`video-${currentIndex}`);
             if (!video || video.tagName === 'IFRAME') return; // iframe channels can't use PiP
-            if (!document.pictureInPictureEnabled || document.pictureInPictureElement) return;
             if (video.paused) return;
-            video.requestPictureInPicture().catch(err => console.log("Auto mini player blocked:", err));
+            enterPiP(video);
         });
 
         initDOM();
