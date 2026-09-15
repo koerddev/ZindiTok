@@ -152,11 +152,63 @@
             width: 75%; 
         }
 
+        .channel-header-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 6px;
+        }
+
+        .channel-avatar-link {
+            display: block;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: 1.5px solid #fff;
+            overflow: hidden;
+            flex-shrink: 0;
+            background: #222;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .channel-avatar {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
         .channel-name {
-            font-size: 24px;
+            font-size: 16px;
             font-weight: 700;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
-            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .follow-btn {
+            background: transparent;
+            color: #fff;
+            border: 1.5px solid rgba(255,255,255,0.7);
+            border-radius: 14px;
+            padding: 4px 14px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            flex-shrink: 0;
+            pointer-events: auto;
+            margin-left: 4px;
+            transition: all 0.15s;
+        }
+
+        .follow-btn:active {
+            transform: scale(0.95);
+        }
+
+        .follow-btn.following {
+            color: rgba(255,255,255,0.6);
+            border-color: rgba(255,255,255,0.3);
         }
 
         .channel-category {
@@ -174,28 +226,6 @@
             gap: 18px;
             pointer-events: auto;
             z-index: 30;
-        }
-
-        .channel-logo-link {
-            display: block;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border: 2px solid #fff;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            transition: transform 0.2s;
-            background: #222;
-        }
-
-        .channel-logo-link:hover {
-            transform: scale(1.1);
-        }
-
-        .channel-logo {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
         }
 
         .sidebar-btn {
@@ -720,16 +750,18 @@
                             </div>
                         </div>
                         <div class="bottom-ui">
-                            <div class="channel-name">${channel.name}</div>
+                            <div class="channel-header-row">
+                                <a href="${channel.website}" target="_blank" class="channel-avatar-link" title="Visit Website" aria-label="Visit ${channel.name} website">
+                                    <img src="${channel.logo}" alt="${channel.name} Logo" class="channel-avatar" />
+                                </a>
+                                <div class="channel-name">${channel.name}</div>
+                                <button class="follow-btn" onclick="toggleFollow(event, ${i})" id="follow-btn-${i}">Follow</button>
+                            </div>
                             <div class="channel-category">${channel.category}</div>
                         </div>
                     </div>
 
                     <div class="right-sidebar">
-                        <a href="${channel.website}" target="_blank" class="channel-logo-link" title="Visit Website" aria-label="Visit ${channel.name} website">
-                            <img src="${channel.logo}" alt="${channel.name} Logo" class="channel-logo" />
-                        </a>
-
                         ${fullscreenBtn}
                         ${miniPlayerBtn}
                         
@@ -996,6 +1028,16 @@
             document.querySelectorAll('.unmute-overlay').forEach(overlay => {
                 overlay.style.display = isMuted ? 'flex' : 'none';
             });
+        }
+
+        // Placeholder for now - just flips the button's visual state.
+        // TODO: wire this up to real push-notification subscription logic.
+        function toggleFollow(event, index) {
+            if (event) event.stopPropagation();
+            const btn = document.getElementById(`follow-btn-${index}`);
+            if (!btn) return;
+            const isFollowing = btn.classList.toggle('following');
+            btn.textContent = isFollowing ? 'Following' : 'Follow';
         }
 
         function toggleMute(event) {
