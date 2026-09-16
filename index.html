@@ -110,7 +110,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: calc(30px + env(safe-area-inset-top)) 20px calc(30px + env(safe-area-inset-bottom));
+            padding: calc(30px + env(safe-area-inset-top)) 20px calc(108px + env(safe-area-inset-bottom));
             background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 20%, transparent 80%, rgba(0,0,0,0.8) 100%);
             z-index: 10;
         }
@@ -176,7 +176,11 @@
         .bottom-nav {
             position: fixed;
             left: 50%;
-            bottom: calc(14px + env(safe-area-inset-bottom));
+            /* Extra clearance by default - mobile Safari/Chrome's own
+               floating bottom toolbar isn't accounted for by
+               safe-area-inset-bottom, so this needs real headroom on top
+               of it to avoid sitting behind that browser chrome. */
+            bottom: calc(70px + env(safe-area-inset-bottom));
             transform: translateX(-50%);
             display: flex;
             gap: 4px;
@@ -187,6 +191,14 @@
             padding: 5px;
             z-index: 50;
             pointer-events: auto;
+        }
+
+        /* Installed as an app (Add to Home Screen) - no browser chrome to
+           avoid, so sit close to the bottom edge instead. */
+        @media (display-mode: standalone), (display-mode: fullscreen), (display-mode: minimal-ui) {
+            .bottom-nav {
+                bottom: calc(14px + env(safe-area-inset-bottom));
+            }
         }
 
         .nav-btn {
@@ -405,7 +417,7 @@
         .right-sidebar {
             position: absolute;
             right: 15px;
-            bottom: calc(60px + env(safe-area-inset-bottom));
+            bottom: calc(100px + env(safe-area-inset-bottom));
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -709,7 +721,7 @@
             { id: 5, name: "Zagros24", category: "Rojhilat & Iran News", url: "https://hlspackager.akamaized.net/live/DB/ZAGROS_24/HLS/ZAGROS_24.m3u8", logo: "https://www.google.com/s2/favicons?sz=128&domain=zagros24.net", website: "https://zagros24.net/" },
             { id: 6, name: "Rojava", category: "Rojava News & Culture", url: "https://hlspackager.akamaized.net/live/DB/ROJAVA_HD/HLS/ROJAVA_HD.m3u8", logo: "https://www.google.com/s2/favicons?sz=128&domain=rojavatv.net", website: "https://rojavatv.net" },
             { id: 7, name: "ÇiraTV", category: "Ezidi News & Culture", type: "iframe", url: "https://ok.ru/videoembed/10267254464101?autoplay=1", logo: "https://yt3.googleusercontent.com/oClAXiwBo_m56FOVdQW9gpX8Ei6XiBkLdxkNB-EGpWQbZ7yXHaJt4CQ09pS5nuJeoxm0NVyVrw=s160-c-k-c0x00ffffff-no-rj", website: "https://ciratv.com/" },
-            { id: 8, name: "Medya Haber", category: "Kurdish Media in Turkish", type: "iframe", url: "https://www.youtube.com/embed/otBzstJGtw4?autoplay=1&mute=0&rel=0&playsinline=1&enablejsapi=1", logo: "https://www.google.com/s2/favicons?sz=128&domain=medyahabertv.digital", website: "https://www.medyahabertv.digital/" },
+            { id: 8, name: "Medya Haber", category: "Kurdish Media in Turkish", type: "iframe", url: "https://www.youtube.com/embed/og3XyMupw_Q?autoplay=1&mute=0&rel=0&playsinline=1&enablejsapi=1", logo: "https://www.google.com/s2/favicons?sz=128&domain=medyahabertv.digital", website: "https://www.medyahabertv.digital/" },
             { id: 9, name: "İlke TV", category: "Bakur & Turkey News", url: "https://stream.ilketv.com.tr/hls/ilkecanli.m3u8", logo: "https://www.google.com/s2/favicons?sz=128&domain=ilketv.com.tr", website: "https://ilketv.com.tr/" },
             { id: 10, name: "Alyaum TV", category: "Rojava & Syria News", url: "https://hlspackager.akamaized.net/live/DB/ALYAUM_TV/HLS/ALYAUM_TV.m3u8", logo: "https://www.google.com/s2/favicons?sz=128&domain=alyaumtv.net", website: "https://alyaumtv.net/" },
             { id: 11, name: "ZarokTV", category: "Children's Channel", url: "https://zindikurmanci.zaroktv.com.tr/hls/0/stream.m3u8", logo: "https://www.google.com/s2/favicons?sz=128&domain=zaroktv.com.tr", website: "https://zaroktv.com.tr/" },
