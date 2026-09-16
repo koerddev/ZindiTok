@@ -169,7 +169,193 @@
             flex-shrink: 0;
             background: #222;
             box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            pointer-events: auto;
         }
+
+        /* Bottom navigation bar */
+        .bottom-nav {
+            position: fixed;
+            left: 50%;
+            bottom: calc(14px + env(safe-area-inset-bottom));
+            transform: translateX(-50%);
+            display: flex;
+            gap: 4px;
+            background: rgba(20,20,20,0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 28px;
+            padding: 5px;
+            z-index: 50;
+            pointer-events: auto;
+        }
+
+        .nav-btn {
+            width: 50px;
+            height: 42px;
+            border: none;
+            background: transparent;
+            color: rgba(255,255,255,0.55);
+            border-radius: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .nav-btn svg {
+            width: 23px;
+            height: 23px;
+        }
+
+        .nav-btn.active {
+            color: #000;
+            background: #fff;
+        }
+
+        /* Radio / Profile full-screen views */
+        .side-view {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            z-index: 40;
+            display: none;
+            flex-direction: column;
+            padding: calc(24px + env(safe-area-inset-top)) 20px calc(100px + env(safe-area-inset-bottom));
+            overflow-y: auto;
+            color: #fff;
+        }
+
+        .side-view.visible {
+            display: flex;
+        }
+
+        .side-view-header h2 {
+            font-size: 22px;
+            margin: 10px 0 20px;
+        }
+
+        #radio-view {
+            background: linear-gradient(135deg, #00f2ea, #ff0050);
+        }
+
+        #radio-view .side-view-placeholder {
+            color: #fff;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.45);
+        }
+
+        .side-view-placeholder {
+            margin: auto;
+            text-align: center;
+            color: rgba(255,255,255,0.6);
+            padding: 0 20px;
+        }
+
+        .side-view-placeholder .icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+        }
+
+        .following-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .following-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 10px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.06);
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+
+        .following-item:active {
+            background: rgba(255,255,255,0.12);
+        }
+
+        .following-item img {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+            background: #222;
+        }
+
+        .following-item .fi-name {
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        .following-item .fi-category {
+            font-size: 12.5px;
+            color: #aaa;
+        }
+
+        .following-empty {
+            margin: auto;
+            text-align: center;
+            color: rgba(255,255,255,0.5);
+            padding: 0 20px;
+        }
+
+        .profile-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 28px;
+        }
+
+        .profile-action-btn {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            width: 100%;
+            background: rgba(255,255,255,0.06);
+            border: none;
+            border-radius: 12px;
+            padding: 14px 16px;
+            color: #fff;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: left;
+            transition: background 0.15s;
+        }
+
+        .profile-action-btn:active {
+            background: rgba(255,255,255,0.12);
+        }
+
+        .profile-action-btn .pab-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .profile-action-btn .pab-icon svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .profile-action-btn.download .pab-icon {
+            background: linear-gradient(135deg, #00f2ea, #ff0050);
+            color: #000;
+        }
+
+        .profile-action-btn.about .pab-icon {
+            background: rgba(255,255,255,0.12);
+            color: #fff;
+        }
+
 
         .channel-avatar {
             width: 100%;
@@ -423,6 +609,79 @@
 
     <div class="fixed-logo">ZindîTok</div>
 
+    <!-- Bottom navigation: Channels (TV) / Radio (music) / Profile (person) -->
+    <nav class="bottom-nav" id="bottom-nav">
+        <button class="nav-btn active" id="nav-channels" onclick="switchTab('channels')" title="Channels" aria-label="Channels">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="7" width="18" height="13" rx="2"/>
+                <path d="M8 3l4 4 4-4"/>
+            </svg>
+        </button>
+        <button class="nav-btn" id="nav-radio" onclick="switchTab('radio')" title="Radio" aria-label="Radio">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18V5l11-2v13"/>
+                <circle cx="6" cy="18" r="3"/>
+                <circle cx="17" cy="16" r="3"/>
+            </svg>
+        </button>
+        <button class="nav-btn" id="nav-profile" onclick="switchTab('profile')" title="Profile" aria-label="Profile">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="8" r="4"/>
+                <path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/>
+            </svg>
+        </button>
+    </nav>
+
+    <div class="side-view" id="radio-view">
+        <div class="side-view-placeholder">
+            <div class="icon">🎵</div>
+            <h2>Radio</h2>
+            <p>Radio channels are coming soon.</p>
+        </div>
+    </div>
+
+    <div class="side-view" id="profile-view">
+        <div class="side-view-header">
+            <h2>Profile</h2>
+        </div>
+
+        <div class="profile-actions">
+            <button class="profile-action-btn download" onclick="handleInstallClick(event)">
+                <span class="pab-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/>
+                    </svg>
+                </span>
+                <span>Download App</span>
+            </button>
+            <button class="profile-action-btn about" onclick="showAboutModal(event)">
+                <span class="pab-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="9"/>
+                        <path d="M12 11v5"/>
+                        <circle cx="12" cy="8" r="0.5" fill="currentColor" stroke="currentColor"/>
+                    </svg>
+                </span>
+                <span>About</span>
+            </button>
+        </div>
+
+        <div class="side-view-header">
+            <h2>Following</h2>
+        </div>
+        <div class="following-list" id="following-list"></div>
+    </div>
+
+    <div class="install-modal" id="about-modal">
+        <div class="install-modal-content">
+            <h3>About ZindîTok</h3>
+            <p>ZindîTok brings live Kurdish television into one place, presented as a vertical feed you can scroll through - swipe between live news, music, culture, and children's channels from across Kurdistan and the diaspora, all streaming in real time.</p>
+            <p>Tap Follow to keep track of your favorite channels and find them quickly from your Profile. Use the mini player to keep watching while you browse elsewhere, or add ZindîTok to your home screen for one-tap access, just like a native app.</p>
+            <p>This project is independently built and is not affiliated with any of the broadcasters featured. All streams belong to their respective channels.</p>
+            <button onclick="closeAboutModal()">Got it</button>
+        </div>
+    </div>
+
     <div class="swipe-hint" id="swipe-hint">
         <span>&#8593;</span> Swipe up for more channels
     </div>
@@ -503,6 +762,15 @@
 
         function closeInstallModal() {
             document.getElementById('install-modal').style.display = 'none';
+        }
+
+        function showAboutModal(event) {
+            if (event) event.stopPropagation();
+            document.getElementById('about-modal').style.display = 'flex';
+        }
+
+        function closeAboutModal() {
+            document.getElementById('about-modal').style.display = 'none';
         }
 
         async function handleInstallClick(event) {
@@ -629,6 +897,21 @@
         let isMuted = localStorage.getItem('zinditok_muted') !== 'false';
         const hlsInstances = new Map();
 
+        // Followed channels, tracked by channel id (not container index) and
+        // persisted across sessions. Every loop-copy of a channel shares the
+        // same follow state, and this is also what powers the Profile tab's
+        // "Following" list.
+        let followedChannels = new Set();
+        try {
+            followedChannels = new Set(JSON.parse(localStorage.getItem('zinditok_followed') || '[]'));
+        } catch (e) {
+            followedChannels = new Set();
+        }
+
+        function saveFollowedChannels() {
+            localStorage.setItem('zinditok_followed', JSON.stringify([...followedChannels]));
+        }
+
         const appContainer = document.getElementById('app');
 
         // Always guarantees the video actually starts playing. Browsers will
@@ -715,13 +998,6 @@
                             ${isMuted ? '🔇' : '🔊'}
                         </button>`;
 
-                const installBtn = `
-                        <button class="sidebar-btn" onclick="handleInstallClick(event)" title="Add to Home Screen" aria-label="Add to home screen">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/>
-                            </svg>
-                        </button>`;
-
                 const unmuteOverlay = isIframe ? '' : `
                     <div class="status-overlay unmute-overlay" id="unmute-overlay-${i}" style="display: ${isMuted ? 'flex' : 'none'};">
                         <button class="unmute-btn" onclick="toggleMute(event)">Tap to Unmute</button>
@@ -756,7 +1032,7 @@
                                     <img src="${channel.logo}" alt="${channel.name} Logo" class="channel-avatar" />
                                 </a>
                                 <div class="channel-name">${channel.name}</div>
-                                <button class="follow-btn" onclick="toggleFollow(event, ${i})" id="follow-btn-${i}">Follow</button>
+                                <button class="follow-btn${followedChannels.has(channel.id) ? ' following' : ''}" data-channel-id="${channel.id}" onclick="toggleFollow(event, ${channel.id})">${followedChannels.has(channel.id) ? 'Following' : 'Follow'}</button>
                             </div>
                             <div class="channel-category">${channel.category}</div>
                         </div>
@@ -773,7 +1049,6 @@
                         </button>
 
                         ${muteBtn}
-                        ${installBtn}
                     </div>
 
                     <div class="status-overlay" id="loading-${i}">
@@ -1031,14 +1306,25 @@
             });
         }
 
-        // Placeholder for now - just flips the button's visual state.
-        // TODO: wire this up to real push-notification subscription logic.
-        function toggleFollow(event, index) {
+        // TODO: wire this up to real push-notification subscription logic later.
+        function toggleFollow(event, channelId) {
             if (event) event.stopPropagation();
-            const btn = document.getElementById(`follow-btn-${index}`);
-            if (!btn) return;
-            const isFollowing = btn.classList.toggle('following');
-            btn.textContent = isFollowing ? 'Following' : 'Follow';
+            const following = followedChannels.has(channelId);
+            if (following) {
+                followedChannels.delete(channelId);
+            } else {
+                followedChannels.add(channelId);
+            }
+            saveFollowedChannels();
+
+            const nowFollowing = !following;
+            document.querySelectorAll(`.follow-btn[data-channel-id="${channelId}"]`).forEach(btn => {
+                btn.classList.toggle('following', nowFollowing);
+                btn.textContent = nowFollowing ? 'Following' : 'Follow';
+            });
+
+            const profileView = document.getElementById('profile-view');
+            if (profileView.classList.contains('visible')) renderFollowingList();
         }
 
         function toggleMute(event) {
@@ -1117,6 +1403,74 @@
             if (video.paused) return;
             enterPiP(video);
         });
+
+        // Switches between the Channels feed, Radio (placeholder), and
+        // Profile tabs. Leaving Channels pauses/unloads whatever's currently
+        // playing so audio doesn't keep running in the background while
+        // browsing another tab; returning to Channels resumes it via the
+        // normal updatePlayers() flow.
+        function switchTab(tab) {
+            document.getElementById('nav-channels').classList.toggle('active', tab === 'channels');
+            document.getElementById('nav-radio').classList.toggle('active', tab === 'radio');
+            document.getElementById('nav-profile').classList.toggle('active', tab === 'profile');
+
+            const radioView = document.getElementById('radio-view');
+            const profileView = document.getElementById('profile-view');
+
+            if (tab === 'channels') {
+                appContainer.style.display = '';
+                radioView.classList.remove('visible');
+                profileView.classList.remove('visible');
+                updatePlayers();
+            } else {
+                appContainer.style.display = 'none';
+                const video = document.getElementById(`video-${currentIndex}`);
+                const channel = uniqueChannels[currentIndex % uniqueChannels.length];
+                if (channel.type === 'iframe') {
+                    unloadVideo(currentIndex);
+                } else if (video) {
+                    video.pause();
+                }
+                radioView.classList.toggle('visible', tab === 'radio');
+                profileView.classList.toggle('visible', tab === 'profile');
+                if (tab === 'profile') renderFollowingList();
+            }
+        }
+
+        function renderFollowingList() {
+            const list = document.getElementById('following-list');
+            const ids = [...followedChannels];
+
+            if (ids.length === 0) {
+                list.innerHTML = `<div class="following-empty">You haven't followed any channels yet.<br>Tap "Follow" on a channel to add it here.</div>`;
+                return;
+            }
+
+            list.innerHTML = ids.map(id => {
+                const channel = uniqueChannels.find(c => c.id === id);
+                if (!channel) return '';
+                return `
+                    <div class="following-item" onclick="jumpToChannel(${id})">
+                        <img src="${channel.logo}" alt="${channel.name}" />
+                        <div>
+                            <div class="fi-name">${channel.name}</div>
+                            <div class="fi-category">${channel.category}</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Jumps back to the Channels tab, scrolled directly to the tapped
+        // followed channel.
+        function jumpToChannel(channelId) {
+            const middleBlock = Math.floor(LOOP_MULTIPLIER / 2) * uniqueChannels.length;
+            const pos = uniqueChannels.findIndex(c => c.id === channelId);
+            if (pos === -1) return;
+            currentIndex = middleBlock + pos;
+            switchTab('channels');
+            document.getElementById(`container-${currentIndex}`).scrollIntoView({ behavior: 'auto' });
+        }
 
         initDOM();
         document.getElementById(`container-${currentIndex}`).scrollIntoView();
