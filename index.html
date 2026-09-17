@@ -251,6 +251,1603 @@
             background: linear-gradient(135deg, #00f2ea, #ff0050);
         }
 
+        .radio-player {
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 6px;
+            width: 100%;
+        }
+
+        .radio-art {
+            width: 150px;
+            height: 150px;
+            border-radius: 20px;
+            object-fit: cover;
+            background: rgba(0,0,0,0.25);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+            margin-bottom: 18px;
+        }
+
+        .radio-name {
+            font-size: 20px;
+            font-weight: 800;
+            color: #fff;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.45);
+        }
+
+        .radio-category {
+            font-size: 14px;
+            color: rgba(255,255,255,0.85);
+            text-shadow: 0 2px 8px rgba(0,0,0,0.45);
+            margin-bottom: 26px;
+        }
+
+        .radio-controls {
+            display: flex;
+            align-items: center;
+            gap: 26px;
+        }
+
+        .radio-ctrl-btn {
+            background: rgba(0,0,0,0.25);
+            border: none;
+            color: #fff;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .radio-ctrl-btn svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .radio-ctrl-btn.play {
+            width: 68px;
+            height: 68px;
+            background: #fff;
+            color: #000;
+        }
+
+        .radio-ctrl-btn.play svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .radio-status {
+            margin-top: 20px;
+            font-size: 13px;
+            color: rgba(255,255,255,0.85);
+            text-shadow: 0 2px 8px rgba(0,0,0,0.45);
+        }
+
+        #radio-view .side-view-placeholder {
+            color: #fff;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.45);
+        }
+
+        .side-view-placeholder {
+            margin: auto;
+            text-align: center;
+            color: rgba(255,255,255,0.6);
+            padding: 0 20px;
+        }
+
+        .side-view-placeholder .icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+        }
+
+        .following-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .following-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 10px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.06);
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+
+        .following-item:active {
+            background: rgba(255,255,255,0.12);
+        }
+
+        .following-item img {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+            background: #222;
+        }
+
+        .following-item .fi-name {
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        .following-item .fi-category {
+            font-size: 12.5px;
+            color: #aaa;
+        }
+
+        .following-empty {
+            margin: auto;
+            text-align: center;
+            color: rgba(255,255,255,0.5);
+            padding: 0 20px;
+        }
+
+        .profile-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 28px;
+        }
+
+        .profile-action-btn {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            width: 100%;
+            background: rgba(255,255,255,0.06);
+            border: none;
+            border-radius: 12px;
+            padding: 14px 16px;
+            color: #fff;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: left;
+            transition: background 0.15s;
+        }
+
+        .profile-action-btn:active {
+            background: rgba(255,255,255,0.12);
+        }
+
+        .profile-action-btn .pab-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .profile-action-btn .pab-icon svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .profile-action-btn.download .pab-icon {
+            background: linear-gradient(135deg, #00f2ea, #ff0050);
+            color: #000;
+        }
+
+        .profile-action-btn.about .pab-icon {
+            background: rgba(255,255,255,0.12);
+            color: #fff;
+        }
+
+
+        .channel-avatar {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .channel-name {
+            font-size: 16px;
+            font-weight: 700;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .follow-btn {
+            background: transparent;
+            color: #fff;
+            border: 1.5px solid rgba(255,255,255,0.7);
+            border-radius: 14px;
+            padding: 4px 14px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            flex-shrink: 0;
+            pointer-events: auto;
+            margin-left: 4px;
+            transition: all 0.15s;
+        }
+
+        .follow-btn:active {
+            transform: scale(0.95);
+        }
+
+        .follow-btn.following {
+            color: rgba(255,255,255,0.6);
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        .channel-category {
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        .right-sidebar {
+            position: absolute;
+            right: 15px;
+            bottom: calc(100px + env(safe-area-inset-bottom));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+            pointer-events: auto;
+            z-index: 30;
+        }
+
+        .sidebar-btn {
+            background: rgba(0,0,0,0.4);
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 20px;
+            backdrop-filter: blur(5px);
+            transition: all 0.2s;
+            color: white;
+            border: none;
+        }
+
+        .sidebar-btn:hover {
+            background: rgba(0,0,0,0.6);
+            transform: scale(1.05);
+        }
+
+        .sidebar-btn svg {
+            width: 22px;
+            height: 22px;
+            fill: currentColor;
+        }
+
+        .status-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none; 
+            flex-direction: column;
+            align-items: center;
+            z-index: 20;
+            text-align: center;
+            pointer-events: none;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255,255,255,0.3);
+            border-top: 4px solid #fff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        .error-message {
+            background: rgba(255, 0, 0, 0.8);
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .unmute-btn {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.5);
+            padding: 12px 24px;
+            border-radius: 30px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            pointer-events: auto;
+            transition: background 0.2s;
+        }
+
+        .unmute-btn:hover { background: rgba(255,255,255,0.3); }
+
+        /* Install / Add-to-Home-Screen modal */
+        .install-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.75);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            pointer-events: auto;
+        }
+
+        .install-modal-content {
+            background: #151515;
+            border-radius: 16px;
+            padding: 28px 24px;
+            max-width: 320px;
+            width: 85%;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .install-modal-content h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        .install-modal-content p {
+            font-size: 14px;
+            color: #ccc;
+            line-height: 1.5;
+            margin-bottom: 14px;
+        }
+
+        .install-modal-content p:empty {
+            margin-bottom: 0;
+        }
+
+        .install-modal-content ol {
+            text-align: left;
+            list-style: none;
+            counter-reset: step-counter;
+            margin-bottom: 22px;
+            padding: 0;
+        }
+
+        .install-modal-content ol:empty {
+            margin-bottom: 0;
+        }
+
+        .install-modal-content ol li {
+            counter-increment: step-counter;
+            font-size: 14px;
+            color: #eee;
+            line-height: 1.45;
+            padding-left: 32px;
+            position: relative;
+            margin-bottom: 12px;
+        }
+
+        .install-modal-content ol li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: -1px;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: linear-gradient(90deg, #00f2ea, #ff0050);
+            color: #000;
+            font-weight: bold;
+            font-size: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .install-modal-content button {
+            background: linear-gradient(90deg, #00f2ea, #ff0050);
+            border: none;
+            padding: 10px 28px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+            color: #000;
+            cursor: pointer;
+        }
+
+        /* One-time "swipe up" hint for first-time visitors */
+        .swipe-hint {
+            position: fixed;
+            left: 50%;
+            bottom: calc(100px + env(safe-area-inset-bottom));
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(6px);
+            padding: 12px 20px;
+            border-radius: 24px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+            z-index: 60;
+            display: none;
+            align-items: center;
+            gap: 8px;
+            pointer-events: none;
+            animation: swipe-hint-bounce 1.4s ease-in-out infinite;
+        }
+
+        @keyframes swipe-hint-bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-8px); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="app"></div>
+
+    <div class="fixed-logo">ZindîTok</div>
+
+    <!-- Bottom navigation: Channels (TV) / Radio (music) / Profile (person) -->
+    <nav class="bottom-nav" id="bottom-nav">
+        <button class="nav-btn active" id="nav-channels" onclick="switchTab('channels')" title="Channels" aria-label="Channels">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="7" width="18" height="13" rx="2"/>
+                <path d="M8 3l4 4 4-4"/>
+            </svg>
+        </button>
+        <button class="nav-btn" id="nav-radio" onclick="switchTab('radio')" title="Radio" aria-label="Radio">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18V5l11-2v13"/>
+                <circle cx="6" cy="18" r="3"/>
+                <circle cx="17" cy="16" r="3"/>
+            </svg>
+        </button>
+        <button class="nav-btn" id="nav-profile" onclick="switchTab('profile')" title="Profile" aria-label="Profile">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="8" r="4"/>
+                <path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/>
+            </svg>
+        </button>
+    </nav>
+
+    <div class="side-view" id="radio-view">
+        <div class="radio-player">
+            <img class="radio-art" id="radio-art" src="" alt="" />
+            <div class="radio-name" id="radio-name"></div>
+            <div class="radio-category" id="radio-category"></div>
+
+            <div class="radio-controls">
+                <button class="radio-ctrl-btn" onclick="radioPrev(event)" aria-label="Previous station">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
+                    </svg>
+                </button>
+                <button class="radio-ctrl-btn play" id="radio-play-btn" onclick="radioTogglePlay(event)" aria-label="Play or pause">
+                    <svg viewBox="0 0 24 24" fill="currentColor" id="radio-play-icon">
+                        <path d="M8 5v14l11-7z"/>
+                    </svg>
+                </button>
+                <button class="radio-ctrl-btn" onclick="radioNext(event)" aria-label="Next station">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M16 6h2v12h-2zM6 6l8.5 6L6 18z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="radio-status" id="radio-status">Tap play to listen</div>
+        </div>
+    </div>
+
+    <audio id="radio-audio" preload="none"></audio>
+
+    <div class="side-view" id="profile-view">
+        <div class="side-view-header">
+            <h2>Profile</h2>
+        </div>
+
+        <div class="profile-actions">
+            <button class="profile-action-btn download" onclick="handleInstallClick(event)">
+                <span class="pab-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/>
+                    </svg>
+                </span>
+                <span>Download App</span>
+            </button>
+            <button class="profile-action-btn about" onclick="showAboutModal(event)">
+                <span class="pab-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="9"/>
+                        <path d="M12 11v5"/>
+                        <circle cx="12" cy="8" r="0.5" fill="currentColor" stroke="currentColor"/>
+                    </svg>
+                </span>
+                <span>About</span>
+            </button>
+        </div>
+
+        <div class="side-view-header">
+            <h2>Following</h2>
+        </div>
+        <div class="following-list" id="following-list"></div>
+    </div>
+
+    <div class="install-modal" id="about-modal">
+        <div class="install-modal-content">
+            <h3>About ZindîTok</h3>
+            <p>ZindîTok brings live Kurdish television into one place, presented as a vertical feed you can scroll through - swipe between live news, music, culture, and children's channels from across Kurdistan and the diaspora, all streaming in real time.</p>
+            <p>Tap Follow to keep track of your favorite channels and find them quickly from your Profile. Use the mini player to keep watching while you browse elsewhere, or add ZindîTok to your home screen for one-tap access, just like a native app.</p>
+            <p>This project is independently built and is not affiliated with any of the broadcasters featured. All streams belong to their respective channels.</p>
+            <button onclick="closeAboutModal()">Got it</button>
+        </div>
+    </div>
+
+    <div class="swipe-hint" id="swipe-hint">
+        <span>&#8593;</span> Swipe up for more channels
+    </div>
+
+    <div class="install-modal" id="install-modal">
+        <div class="install-modal-content">
+            <h3 id="install-modal-title"></h3>
+            <p id="install-modal-intro"></p>
+            <ol id="install-modal-steps"></ol>
+            <button onclick="closeInstallModal()">Got it</button>
+        </div>
+    </div>
+
+
+    <script>
+        // Add `type: "iframe"` on any channel that isn't a direct HLS (.m3u8) stream,
+        // e.g. embed pages like ok.ru/videoembed/... . Everything without a `type`
+        // is treated as a normal HLS video.
+        const uniqueChannels = [
+            { id: 0, name: "Med Muzîk", category: "Music", url: "https://m3u8-proxy.koerdnederland.workers.dev/live3.m3u8", logo: "https://www.google.com/s2/favicons?sz=128&domain=medmuzik.tv", website: "http://medmuzik.tv/" },
+            { id: 1, name: "StêrkTV", category: "Kurdistan News", url: "https://zindi.sterk.tv/live/sterk.m3u8", logo: "https://www.google.com/s2/favicons?sz=128&domain=sterk.tv", website: "https://sterk.tv" },
+            { id: 2, name: "JinTV", category: "By Women for Women, Women-focused Channel", url: "https://live.jintv.org/medialive/jintv.m3u8", logo: "https://www.google.com/s2/favicons?sz=128&domain=jintv.net", website: "https://jintv.net/" },
+            { id: 3, name: "RonahiTV", category: "Rojava News & Culture", url: "https://hlspackager.akamaized.net/live/DB/RONAHI_TV/HLS/RONAHI_TV.m3u8", logo: "https://www.google.com/s2/favicons?sz=128&domain=ronahi.tv", website: "https://ronahi.tv" },
+            { id: 4, name: "Nûçe TV", category: "Kurdistan News & Culture", url: "https://hlspackager.akamaized.net/live/DB/NU_TV/HLS/NU_TV.m3u8", logo: "https://www.google.com/s2/favicons?sz=128&domain=nucetv.net", website: "https://nucetv.net/" },
+            { id: 5, name: "Zagros24", category: "Rojhilat & Iran News", url: "https://hlspackager.akamaized.net/live/DB/ZAGROS_24/HLS/ZAGROS_24.m3u8", logo: "https://www.google.com/s2/favicons?sz=128&domain=zagros24.net", website: "https://zagros24.net/" },
+            { id: 6, name: "Rojava", category: "Rojava News & Culture", url: "https://hlspackager.akamaized.net/live/DB/ROJAVA_HD/HLS/ROJAVA_HD.m3u8", logo: "https://www.google.com/s2/favicons?sz=128&domain=rojavatv.net", website: "https://rojavatv.net" },
+            { id: 7, name: "ÇiraTV", category: "Ezidi News & Culture", type: "iframe", url: "https://ok.ru/videoembed/10267254464101?autoplay=1", logo: "https://yt3.googleusercontent.com/oClAXiwBo_m56FOVdQW9gpX8Ei6XiBkLdxkNB-EGpWQbZ7yXHaJt4CQ09pS5nuJeoxm0NVyVrw=s160-c-k-c0x00ffffff-no-rj", website: "https://ciratv.com/" },
+            { id: 8, name: "Medya Haber", category: "Kurdish Media in Turkish", type: "iframe", url: "https://www.youtube.com/embed/otBzstJGtw4?autoplay=1&mute=0&rel=0&playsinline=1&enablejsapi=1", logo: "https://www.google.com/s2/favicons?sz=128&domain=medyahabertv.digital", website: "https://www.medyahabertv.digital/" },
+            { id: 9, name: "İlke TV", category: "Bakur & Turkey News", url: "https://stream.ilketv.com.tr/hls/ilkecanli.m3u8", logo: "https://www.google.com/s2/favicons?sz=128&domain=ilketv.com.tr", website: "https://ilketv.com.tr/" },
+            { id: 10, name: "Alyaum TV", category: "Rojava & Syria News", url: "https://hlspackager.akamaized.net/live/DB/ALYAUM_TV/HLS/ALYAUM_TV.m3u8", logo: "https://www.google.com/s2/favicons?sz=128&domain=alyaumtv.net", website: "https://alyaumtv.net/" },
+            { id: 11, name: "ZarokTV", category: "Children's Channel", url: "https://zindikurmanci.zaroktv.com.tr/hls/0/stream.m3u8", logo: "https://www.google.com/s2/favicons?sz=128&domain=zaroktv.com.tr", website: "https://zaroktv.com.tr/" },
+        ];
+
+        // Radio stations. Independent list from the TV channels above - the
+        // Radio tab plays through a single shared <audio> element with its
+        // own prev/next/play controls.
+        const radioChannels = [
+            { id: 0, name: "Dirbêsiyê FM", category: "Kurdish Talk & Music Radio", url: "https://dirbesiyefm-rojavaradio.radioca.st/stream?type=http&nocache=4", logo: "https://www.google.com/s2/favicons?sz=128&domain=dirbesiye.fm", website: "https://dirbesiye.fm/" },
+        ];
+
+        // Lower LOOP_MULTIPLIER = fewer DOM nodes rendered up front (faster
+        // first load), at the cost of the infinite-scroll illusion wrapping
+        // around sooner. 16 still allows ~70 scrolls in either direction
+        // before it loops - plenty for a normal session.
+        const LOOP_MULTIPLIER = 16; 
+        const TOTAL_RENDER_COUNT = uniqueChannels.length * LOOP_MULTIPLIER;
+
+        // --- Install / Add-to-Home-Screen support ---
+        // Chrome/Edge (Windows, macOS, Android, ChromeOS) support a real,
+        // native "Install" prompt once a manifest + service worker are
+        // registered. iOS Safari and desktop Safari deliberately do NOT
+        // allow this to be triggered from JS - Apple requires the user to
+        // do it manually, so we detect those cases and show instructions.
+        let deferredInstallPrompt = null;
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredInstallPrompt = e;
+        });
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').catch(err => {
+                console.log('Service worker registration failed:', err);
+            });
+        }
+
+        function detectPlatform() {
+            const ua = navigator.userAgent || navigator.vendor || window.opera || '';
+            const isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+            const isAndroid = /Android/.test(ua);
+            const isWindows = /Windows/.test(ua);
+            const isMac = /Macintosh/.test(ua) && !isIOS;
+            const isSafari = /^((?!chrome|android|crios|fxios|edgios).)*safari/i.test(ua);
+            const isFirefox = /Firefox|FxiOS/.test(ua);
+            return { isIOS, isAndroid, isWindows, isMac, isSafari, isFirefox };
+        }
+
+        function showInstallInstructions(title, intro, steps) {
+            document.getElementById('install-modal-title').textContent = title;
+            document.getElementById('install-modal-intro').textContent = intro || '';
+            document.getElementById('install-modal-steps').innerHTML =
+                (steps || []).map(step => `<li>${step}</li>`).join('');
+            document.getElementById('install-modal').style.display = 'flex';
+        }
+
+        function closeInstallModal() {
+            document.getElementById('install-modal').style.display = 'none';
+        }
+
+        function showAboutModal(event) {
+            if (event) event.stopPropagation();
+            document.getElementById('about-modal').style.display = 'flex';
+        }
+
+        function closeAboutModal() {
+            document.getElementById('about-modal').style.display = 'none';
+        }
+
+        async function handleInstallClick(event) {
+            if (event) event.stopPropagation();
+
+            // Already installed / running as an installed app - nothing to do.
+            if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
+                showInstallInstructions("Already Installed", "ZindîTok is already added to your device.", []);
+                return;
+            }
+
+            if (deferredInstallPrompt) {
+                // Real native install prompt - Chrome/Edge on Windows, macOS,
+                // Android, or ChromeOS. This is the actual "suiting button":
+                // no tutorial needed, the browser handles everything.
+                deferredInstallPrompt.prompt();
+                await deferredInstallPrompt.userChoice;
+                deferredInstallPrompt = null;
+                return;
+            }
+
+            const { isIOS, isAndroid, isWindows, isMac, isSafari, isFirefox } = detectPlatform();
+
+            if (isIOS) {
+                showInstallInstructions(
+                    "Add to Home Screen",
+                    "iOS doesn't allow apps to trigger this automatically, so it takes a few taps:",
+                    [
+                        "Tap the <strong>Share</strong> icon in the toolbar (the square with an arrow pointing up).",
+                        "Scroll down the share menu and tap <strong>Add to Home Screen</strong>.",
+                        "Tap <strong>Add</strong> in the top-right corner."
+                    ]
+                );
+            } else if (isAndroid) {
+                showInstallInstructions(
+                    "Add to Home Screen",
+                    "Your browser didn't offer the one-tap install, but you can still add it manually:",
+                    [
+                        "Tap the <strong>\u22ee</strong> menu in the top-right corner of your browser.",
+                        "Tap <strong>Add to Home screen</strong> (or <strong>Install app</strong>).",
+                        "Confirm by tapping <strong>Add</strong> / <strong>Install</strong>."
+                    ]
+                );
+            } else if (isWindows) {
+                if (isFirefox) {
+                    showInstallInstructions(
+                        "Install Not Supported",
+                        "Firefox on Windows doesn't support installing sites as apps.",
+                        [
+                            "Press <strong>Ctrl+D</strong> to bookmark this page instead, or",
+                            "Open this site in <strong>Edge</strong> or <strong>Chrome</strong> for a one-click Install option."
+                        ]
+                    );
+                } else {
+                    showInstallInstructions(
+                        "Install ZindîTok",
+                        "Add a desktop shortcut and Start Menu entry in a couple of clicks:",
+                        [
+                            "Look for the install icon (\u2295 or a small monitor) at the right side of the address bar.",
+                            "If you don't see it, open the <strong>\u22ee</strong> or <strong>\u22ef</strong> browser menu and choose <strong>Install ZindîTok</strong> / <strong>Apps \u2192 Install this site as an app</strong>.",
+                            "Click <strong>Install</strong> in the confirmation dialog."
+                        ]
+                    );
+                }
+            } else if (isMac && isSafari) {
+                showInstallInstructions(
+                    "Add to Dock",
+                    "",
+                    [
+                        "In the menu bar, choose <strong>File \u2192 Add to Dock</strong> (or tap the Share icon and choose <strong>Add to Dock</strong>).",
+                        "Confirm the name and click <strong>Add</strong>."
+                    ]
+                );
+            } else if (isMac && isFirefox) {
+                showInstallInstructions(
+                    "Install Not Supported",
+                    "Firefox on macOS doesn't support installing sites as apps.",
+                    [
+                        "Press <strong>Cmd+D</strong> to bookmark this page instead, or",
+                        "Open this site in <strong>Safari</strong>, <strong>Edge</strong>, or <strong>Chrome</strong> to install it."
+                    ]
+                );
+            } else {
+                showInstallInstructions(
+                    "Install ZindîTok",
+                    "",
+                    [
+                        "Open your browser's menu (usually <strong>\u22ee</strong> or <strong>\u22ef</strong> near the address bar).",
+                        "Look for <strong>Install app</strong> or <strong>Add to Home screen</strong>.",
+                        "If neither is available, bookmark this page for quick access instead."
+                    ]
+                );
+            }
+        }
+
+        // Deep-linking: if the URL has ?channel=<id>, start on that channel
+        // (still placed in the middle loop-block so infinite scroll still works
+        // both up and down from the starting point).
+        function getInitialIndex() {
+            const params = new URLSearchParams(window.location.search);
+            const channelId = parseInt(params.get('channel'));
+            const middleBlock = Math.floor(LOOP_MULTIPLIER / 2) * uniqueChannels.length;
+
+            if (!isNaN(channelId)) {
+                const channelPos = uniqueChannels.findIndex(c => c.id === channelId);
+                if (channelPos !== -1) {
+                    return middleBlock + channelPos;
+                }
+            }
+
+            // No share link - resume whichever channel was last watched, if any.
+            const lastChannelId = parseInt(localStorage.getItem('zinditok_last_channel'));
+            if (!isNaN(lastChannelId)) {
+                const lastPos = uniqueChannels.findIndex(c => c.id === lastChannelId);
+                if (lastPos !== -1) {
+                    return middleBlock + lastPos;
+                }
+            }
+
+            return middleBlock;
+        }
+
+        let currentIndex = getInitialIndex();
+        let isMuted = localStorage.getItem('zinditok_muted') !== 'false';
+        const hlsInstances = new Map();
+
+        // Followed channels, tracked by channel id (not container index) and
+        // persisted across sessions. Every loop-copy of a channel shares the
+        // same follow state, and this is also what powers the Profile tab's
+        // "Following" list.
+        let followedChannels = new Set();
+        try {
+            followedChannels = new Set(JSON.parse(localStorage.getItem('zinditok_followed') || '[]'));
+        } catch (e) {
+            followedChannels = new Set();
+        }
+
+        function saveFollowedChannels() {
+            localStorage.setItem('zinditok_followed', JSON.stringify([...followedChannels]));
+        }
+
+        const appContainer = document.getElementById('app');
+
+        // Always guarantees the video actually starts playing. Browsers will
+        // reliably autoplay muted video, but often silently block unmuted
+        // autoplay - so if the user's saved sound-on preference gets blocked,
+        // this falls back to muted (and re-shows the unmute button) rather
+        // than leaving the stream stuck paused.
+        function attemptAutoplay(video, index) {
+            video.muted = isMuted;
+            video.volume = 1.0;
+            const playPromise = video.play();
+            if (playPromise !== undefined) {
+                playPromise.catch((err) => {
+                    // Fast scrolling causes play() to get interrupted by a
+                    // pause() call a moment later (the browser throws
+                    // AbortError here) - that's not a real autoplay-policy
+                    // block, so ignore it entirely rather than force-muting.
+                    if (err && err.name === 'AbortError') return;
+
+                    // By the time this fires, the user may have already
+                    // scrolled past this channel - don't touch global mute
+                    // state on behalf of a channel that's no longer active.
+                    if (index !== currentIndex) return;
+
+                    // A genuine autoplay block (NotAllowedError, usually
+                    // because sound was on but no user gesture happened yet
+                    // this session) - fall back to muted so playback still
+                    // starts automatically.
+                    video.muted = true;
+                    video.play().catch(err2 => console.log("Autoplay still blocked:", err2));
+                    if (!isMuted) {
+                        isMuted = true;
+                        localStorage.setItem('zinditok_muted', 'true');
+                        updateMuteUI();
+                    }
+                    const overlay = document.getElementById(`unmute-overlay-${index}`);
+                    if (overlay) overlay.style.display = 'flex';
+                });
+            }
+        }
+
+        function initDOM() {
+            for (let i = 0; i < TOTAL_RENDER_COUNT; i++) {
+                const channel = uniqueChannels[i % uniqueChannels.length];
+                const isIframe = channel.type === 'iframe';
+                const container = document.createElement('div');
+                container.className = 'channel-container';
+                container.id = `container-${i}`;
+                
+                container.onclick = (e) => {
+                    if(e.target === container) handleContainerClick();
+                };
+
+                // pointer-events:none + tabindex="-1" stop this iframe from ever
+                // grabbing keyboard focus. Without this, clicking/interacting with
+                // the embedded ok.ru player hands your arrow-key presses to THEIR
+                // page instead of yours, which they use for volume instead of scroll.
+                const mediaElement = isIframe
+                    ? `<iframe id="video-${i}" src="" frameborder="0" allow="autoplay; fullscreen" allowfullscreen tabindex="-1" style="width:100%;height:100%;pointer-events:none;"></iframe>`
+                    : `<video id="video-${i}" playsinline loop></video>`;
+
+                // Fullscreen + mute controls don't work on cross-origin iframes
+                // (browser security), so they're omitted for iframe-type channels.
+                const fullscreenBtn = isIframe ? '' : `
+                        <button class="sidebar-btn" onclick="toggleFullScreen(event, ${i})" title="Fullscreen" aria-label="Toggle fullscreen">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+                            </svg>
+                        </button>`;
+
+                // Mini player = standard Picture-in-Picture API. Supported on
+                // desktop Chrome/Edge/Safari, Android Chrome, and iOS Safari -
+                // cross-origin iframes (CiraTV) can't use it, same as fullscreen.
+                const miniPlayerBtn = isIframe ? '' : `
+                        <button class="sidebar-btn" onclick="togglePiP(event, ${i})" title="Mini Player" aria-label="Toggle mini player">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="5" width="18" height="13" rx="2"/>
+                                <rect x="13" y="12" width="9" height="7" rx="1.5" fill="currentColor" stroke="none"/>
+                            </svg>
+                        </button>`;
+
+                const muteBtn = isIframe ? '' : `
+                        <button class="sidebar-btn mute-btn-icon" onclick="toggleMute(event)" title="Toggle Sound" aria-label="Toggle sound">
+                            ${isMuted ? '🔇' : '🔊'}
+                        </button>`;
+
+                const unmuteOverlay = isIframe ? '' : `
+                    <div class="status-overlay unmute-overlay" id="unmute-overlay-${i}" style="display: ${isMuted ? 'flex' : 'none'};">
+                        <button class="unmute-btn" onclick="toggleMute(event)">Tap to Unmute</button>
+                    </div>`;
+
+                // Shown only when the user explicitly pauses the currently
+                // active video (tap or spacebar) - not for background videos
+                // paused automatically while scrolling.
+                const pauseOverlay = isIframe ? '' : `
+                    <div class="status-overlay pause-overlay" id="pause-${i}">
+                        <svg viewBox="0 0 24 24" width="70" height="70" fill="rgba(255,255,255,0.9)">
+                            <circle cx="12" cy="12" r="12" fill="rgba(0,0,0,0.45)"/>
+                            <rect x="8" y="7" width="3" height="10" rx="1"/>
+                            <rect x="13" y="7" width="3" height="10" rx="1"/>
+                        </svg>
+                    </div>`;
+
+                container.innerHTML = `
+                    ${mediaElement}
+                    
+                    <div class="ui-layer">
+                        
+                        <div class="top-ui">
+                            <div class="live-badge">
+                                Live <div class="live-dot"></div>
+                                
+                            </div>
+                        </div>
+                        <div class="bottom-ui">
+                            <div class="channel-header-row">
+                                <a href="${channel.website}" target="_blank" class="channel-avatar-link" title="Visit Website" aria-label="Visit ${channel.name} website">
+                                    <img src="${channel.logo}" alt="${channel.name} Logo" class="channel-avatar" />
+                                </a>
+                                <div class="channel-name">${channel.name}</div>
+                                <button class="follow-btn${followedChannels.has(channel.id) ? ' following' : ''}" data-channel-id="${channel.id}" onclick="toggleFollow(event, ${channel.id})">${followedChannels.has(channel.id) ? 'Following' : 'Follow'}</button>
+                            </div>
+                            <div class="channel-category">${channel.category}</div>
+                        </div>
+                    </div>
+
+                    <div class="right-sidebar">
+                        ${fullscreenBtn}
+                        ${miniPlayerBtn}
+                        
+                        <button class="sidebar-btn share-btn" onclick="shareChannel(event, ${i})" title="Share" aria-label="Share this channel">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20.16 11.23l-7.5-6a1.5 1.5 0 00-2.43 1.17v3c-4.48.33-8.23 4.14-8.23 9.6 0 1.25.32 2.45.86 3.5a.5.5 0 00.86-.45c-.86-3.8.46-6.66 3.32-8.08 1.48-.74 3.03-1 4.54-1.11v3.42a1.5 1.5 0 002.43 1.17l7.5-6a1.5 1.5 0 000-2.34z" />
+                            </svg>
+                        </button>
+
+                        ${muteBtn}
+                    </div>
+
+                    <div class="status-overlay" id="loading-${i}">
+                        <div class="spinner"></div>
+                    </div>
+
+                    <div class="status-overlay" id="error-${i}">
+                        <div class="error-message">Stream Unavailable<br><small>Skipping...</small></div>
+                    </div>
+
+                    ${unmuteOverlay}
+                    ${pauseOverlay}
+                `;
+                appContainer.appendChild(container);
+
+                if (!isIframe) {
+                    const videoEl = document.getElementById(`video-${i}`);
+                    const pauseIcon = document.getElementById(`pause-${i}`);
+                    // Only reveal the pause icon if this video is the one
+                    // actually on screen - the app also calls .pause() on
+                    // neighboring videos while scrolling, and we don't want
+                    // the icon flashing on those.
+                    videoEl.addEventListener('pause', () => {
+                        if (i === currentIndex) pauseIcon.style.display = 'flex';
+                    });
+                    videoEl.addEventListener('play', () => {
+                        pauseIcon.style.display = 'none';
+                    });
+                }
+            }
+        }
+
+        function toggleFullScreen(event, index) {
+            if (event) event.stopPropagation();
+            const video = document.getElementById(`video-${index}`);
+            if (!video || video.tagName === 'IFRAME') return; // not supported cross-origin
+
+            // iOS Safari (and every iOS browser, since Apple mandates WebKit)
+            // doesn't support the standard Fullscreen API on arbitrary
+            // elements - video.requestFullscreen() silently does nothing
+            // there. The only fullscreen entry point iOS actually offers is
+            // this video-specific native player - which, like the YouTube
+            // app, automatically presents landscape video sideways on its
+            // own without needing the phone physically rotated. That
+            // rotation is an OS-level behavior tied to this exact API and
+            // isn't something extra JS can add to or improve on iOS.
+            if (typeof video.webkitEnterFullscreen === 'function') {
+                video.webkitEnterFullscreen();
+                return;
+            }
+
+            if (!document.fullscreenElement) {
+                if (video.requestFullscreen) {
+                    video.requestFullscreen();
+                } else if (video.webkitRequestFullscreen) { /* Safari (desktop) */
+                    video.webkitRequestFullscreen();
+                } else if (video.msRequestFullscreen) { /* IE11 */
+                    video.msRequestFullscreen();
+                }
+                // Android Chrome/Edge support forcing landscape on entering
+                // fullscreen. No-ops harmlessly anywhere it isn't supported.
+                if (screen.orientation && screen.orientation.lock) {
+                    screen.orientation.lock('landscape').catch(() => {});
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+
+        function togglePiP(event, index) {
+            if (event) event.stopPropagation();
+            const video = document.getElementById(`video-${index}`);
+            if (!video || video.tagName === 'IFRAME') return; // not supported cross-origin
+
+            // iOS Safari never adopted the standard Picture-in-Picture spec
+            // (requestPictureInPicture/pictureInPictureEnabled) - it only
+            // exposes this older, WebKit-only presentation-mode API instead.
+            if (typeof video.webkitSupportsPresentationMode === 'function' &&
+                video.webkitSupportsPresentationMode('picture-in-picture')) {
+                const isInPiP = video.webkitPresentationMode === 'picture-in-picture';
+                video.webkitSetPresentationMode(isInPiP ? 'inline' : 'picture-in-picture');
+                return;
+            }
+
+            // Standard Picture-in-Picture API (Chrome, Edge, desktop Safari, Android Chrome)
+            if (document.pictureInPictureElement) {
+                document.exitPictureInPicture().catch(err => console.log("Exit mini player failed:", err));
+            } else {
+                enterPiP(video);
+            }
+        }
+
+        function updatePlayers() {
+            for (let i = 0; i < TOTAL_RENDER_COUNT; i++) {
+                const channel = uniqueChannels[i % uniqueChannels.length];
+                const distance = Math.abs(i - currentIndex);
+
+                if (channel.type === 'iframe') {
+                    // Iframes autoplay with sound the instant their src is set and
+                    // can't be muted/paused cross-origin, so only ever load the
+                    // exact channel on screen - never preload it as a neighbor.
+                    if (i === currentIndex) {
+                        loadVideo(i);
+                    } else {
+                        unloadVideo(i);
+                    }
+                    continue;
+                }
+
+                if (distance <= 1) {
+                    loadVideo(i); 
+                } else if (hlsInstances.has(i) || (document.getElementById(`video-${i}`) && document.getElementById(`video-${i}`).hasAttribute('src'))) {
+                    unloadVideo(i); 
+                }
+            }
+
+            for (let i = Math.max(0, currentIndex - 1); i <= Math.min(TOTAL_RENDER_COUNT - 1, currentIndex + 1); i++) {
+                const video = document.getElementById(`video-${i}`);
+                if (!video) continue;
+                if (video.tagName === 'IFRAME') continue; // iframe handles its own playback via autoplay=1
+
+                if (i === currentIndex) {
+                    attemptAutoplay(video, i);
+                } else {
+                    video.pause();
+                }
+            }
+        }
+
+        function loadVideo(index) {
+            const video = document.getElementById(`video-${index}`);
+            const channel = uniqueChannels[index % uniqueChannels.length]; 
+            const loadingUI = document.getElementById(`loading-${index}`);
+            const errorUI = document.getElementById(`error-${index}`);
+
+            if (channel.type === 'iframe') {
+                errorUI.style.display = 'none';
+                loadingUI.style.display = 'none'; // can't detect real load state cross-origin
+                if (video.getAttribute('src')) return; // already loaded, don't re-trigger
+                video.src = channel.url;
+                return;
+            }
+
+            // Already loading/loaded via hls.js - don't touch the UI again,
+            // this is what was causing the spinner to reappear on channels
+            // you'd already watched.
+            if (hlsInstances.has(index)) return;
+
+            // Native HLS (Safari) - same guard, keyed off the src attribute instead.
+            if (!Hls.isSupported() && video.getAttribute('src')) return;
+
+            errorUI.style.display = 'none';
+            loadingUI.style.display = 'flex';
+
+            if (Hls.isSupported()) {
+                const hls = new Hls({ maxBufferLength: 30, maxMaxBufferLength: 60, enableWorker: true });
+                hls.loadSource(channel.url);
+                hls.attachMedia(video);
+                hls.on(Hls.Events.MANIFEST_PARSED, () => {
+                    loadingUI.style.display = 'none';
+                    if (index === currentIndex) {
+                        attemptAutoplay(video, index);
+                    }
+                });
+                hls.on(Hls.Events.ERROR, function (event, data) {
+                    if (data.fatal) {
+                        if (data.type === Hls.ErrorTypes.NETWORK_ERROR) hls.startLoad();
+                        else if (data.type === Hls.ErrorTypes.MEDIA_ERROR) hls.recoverMediaError();
+                        else handleFatalError(index, hls);
+                    }
+                });
+                hlsInstances.set(index, hls);
+            } 
+            else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                video.src = channel.url;
+                video.addEventListener('loadedmetadata', () => {
+                    loadingUI.style.display = 'none';
+                    if (index === currentIndex) {
+                        attemptAutoplay(video, index);
+                    }
+                });
+                video.addEventListener('error', () => handleFatalError(index, null));
+            }
+        }
+
+        function unloadVideo(index) {
+            const hls = hlsInstances.get(index);
+            const video = document.getElementById(`video-${index}`);
+            if (hls) { hls.destroy(); hlsInstances.delete(index); }
+            if (video) {
+                if (video.tagName === 'IFRAME') {
+                    video.src = '';
+                } else {
+                    video.removeAttribute('src');
+                    video.load();
+                }
+            }
+        }
+
+        function handleFatalError(index, hlsInstance) {
+            if (hlsInstance) { hlsInstance.destroy(); hlsInstances.delete(index); }
+            document.getElementById(`loading-${index}`).style.display = 'none';
+            document.getElementById(`error-${index}`).style.display = 'flex';
+            if (index === currentIndex) {
+                setTimeout(() => { if (index === currentIndex) scrollToIndex(index + 1); }, 3000);
+            }
+        }
+
+        function setupObserver() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const newIndex = parseInt(entry.target.id.split('-')[1]);
+                        if (currentIndex !== newIndex) {
+                            const oldPauseIcon = document.getElementById(`pause-${currentIndex}`);
+                            if (oldPauseIcon) oldPauseIcon.style.display = 'none';
+                            currentIndex = newIndex;
+                            updatePlayers();
+                            dismissSwipeHint();
+                            const channel = uniqueChannels[newIndex % uniqueChannels.length];
+                            localStorage.setItem('zinditok_last_channel', channel.id);
+                        }
+                    }
+                });
+            }, { root: appContainer, rootMargin: '0px', threshold: 0.6 });
+            document.querySelectorAll('.channel-container').forEach(container => observer.observe(container));
+        }
+
+        function showSwipeHintIfNeeded() {
+            if (localStorage.getItem('zinditok_seen_hint')) return;
+            const hint = document.getElementById('swipe-hint');
+            if (hint) hint.style.display = 'flex';
+        }
+
+        function dismissSwipeHint() {
+            if (localStorage.getItem('zinditok_seen_hint')) return;
+            localStorage.setItem('zinditok_seen_hint', 'true');
+            const hint = document.getElementById('swipe-hint');
+            if (hint) hint.style.display = 'none';
+        }
+
+        function scrollToIndex(index) {
+            if (index < 0 || index >= TOTAL_RENDER_COUNT) return;
+            document.getElementById(`container-${index}`).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function updateMuteUI() {
+            document.querySelectorAll('.mute-btn-icon').forEach(icon => {
+                icon.innerHTML = isMuted ? '🔇' : '🔊';
+            });
+            document.querySelectorAll('.unmute-overlay').forEach(overlay => {
+                overlay.style.display = isMuted ? 'flex' : 'none';
+            });
+        }
+
+        // TODO: wire this up to real push-notification subscription logic later.
+        function toggleFollow(event, channelId) {
+            if (event) event.stopPropagation();
+            const following = followedChannels.has(channelId);
+            if (following) {
+                followedChannels.delete(channelId);
+            } else {
+                followedChannels.add(channelId);
+            }
+            saveFollowedChannels();
+
+            const nowFollowing = !following;
+            document.querySelectorAll(`.follow-btn[data-channel-id="${channelId}"]`).forEach(btn => {
+                btn.classList.toggle('following', nowFollowing);
+                btn.textContent = nowFollowing ? 'Following' : 'Follow';
+            });
+
+            const profileView = document.getElementById('profile-view');
+            if (profileView.classList.contains('visible')) renderFollowingList();
+        }
+
+        function toggleMute(event) {
+            if (event) event.stopPropagation();
+            isMuted = !isMuted;
+            localStorage.setItem('zinditok_muted', isMuted);
+            const activeVideo = document.getElementById(`video-${currentIndex}`);
+            if (activeVideo && activeVideo.tagName !== 'IFRAME') {
+                activeVideo.muted = isMuted;
+                activeVideo.volume = 1.0;
+            }
+            updateMuteUI();
+        }
+
+        function handleContainerClick() {
+            const video = document.getElementById(`video-${currentIndex}`);
+            if (!video || video.tagName === 'IFRAME') return;
+            video.paused ? video.play() : video.pause();
+        }
+
+        function shareChannel(event, index) {
+            if (event) event.stopPropagation();
+            const channel = uniqueChannels[index % uniqueChannels.length];
+            const baseUrl = window.location.href.split('?')[0];
+            const shareUrl = `${baseUrl}?channel=${channel.id}`;
+            const shareData = {
+                title: `Watch ${channel.name} Live`,
+                text: `Check out ${channel.name} streaming live!`,
+                url: shareUrl
+            };
+            if (navigator.share) {
+                navigator.share(shareData).catch((err) => console.log('Share error:', err));
+            } else {
+                navigator.clipboard.writeText(`${shareData.title} - ${shareData.url}`).then(() => {
+                    alert("Link copied to clipboard!");
+                });
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            switch(e.key) {
+                case 'ArrowUp': e.preventDefault(); scrollToIndex(currentIndex - 1); break;
+                case 'ArrowDown': e.preventDefault(); scrollToIndex(currentIndex + 1); break;
+                case ' ': e.preventDefault(); handleContainerClick(); break;
+                case 'm': case 'M': toggleMute(); break;
+                case 'f': case 'F': toggleFullScreen(null, currentIndex); break;
+            }
+        });
+
+        // Automatically pop into the mini player (Picture-in-Picture) the
+        // moment the app is backgrounded - switching apps, locking the
+        // screen, or closing the browser tab all fire this same event.
+        // Playback then keeps going in the floating window instead of
+        // stopping outright. Browsers close the mini player and restore the
+        // video inline automatically once you come back to the tab.
+        // Shared by the mini player button and the auto-trigger below -
+        // tries the standard API first, falling back to iOS Safari's
+        // WebKit-only presentation-mode API.
+        function enterPiP(video) {
+            if (typeof video.webkitSupportsPresentationMode === 'function' &&
+                video.webkitSupportsPresentationMode('picture-in-picture')) {
+                if (video.webkitPresentationMode !== 'picture-in-picture') {
+                    video.webkitSetPresentationMode('picture-in-picture');
+                }
+                return;
+            }
+            if (document.pictureInPictureEnabled && !document.pictureInPictureElement && video.requestPictureInPicture) {
+                video.requestPictureInPicture().catch(err => console.log("Mini player blocked:", err));
+            }
+        }
+
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState !== 'hidden') return;
+            const video = document.getElementById(`video-${currentIndex}`);
+            if (!video || video.tagName === 'IFRAME') return; // iframe channels can't use PiP
+            if (video.paused) return;
+            enterPiP(video);
+        });
+
+        // --- Radio player ---
+        // Uses one shared <audio> element (parallel to the single shared
+        // <video> used for TV). Media Session hooks below are what let the
+        // user skip to the next station from the lock screen, a notification,
+        // or a hardware/Bluetooth button - i.e. even while the app itself
+        // isn't in the foreground.
+        let radioIndex = 0;
+        const radioAudio = document.getElementById('radio-audio');
+
+        function loadRadioChannel(index, autoplay) {
+            radioIndex = ((index % radioChannels.length) + radioChannels.length) % radioChannels.length;
+            const station = radioChannels[radioIndex];
+
+            document.getElementById('radio-art').src = station.logo;
+            document.getElementById('radio-name').textContent = station.name;
+            document.getElementById('radio-category').textContent = station.category;
+            document.getElementById('radio-status').textContent = 'Loading...';
+
+            radioAudio.pause();
+            radioAudio.src = station.url;
+
+            if ('mediaSession' in navigator) {
+                navigator.mediaSession.metadata = new MediaMetadata({
+                    title: station.name,
+                    artist: 'ZindîTok Radio',
+                    album: station.category,
+                    artwork: [{ src: station.logo, sizes: '128x128', type: 'image/png' }]
+                });
+            }
+
+            if (autoplay) {
+                radioAudio.play().catch(err => console.log("Radio autoplay blocked:", err));
+            }
+        }
+
+        function updateRadioPlayIcon() {
+            const icon = document.getElementById('radio-play-icon');
+            const status = document.getElementById('radio-status');
+            if (radioAudio.paused) {
+                icon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+                status.textContent = 'Paused';
+            } else {
+                icon.innerHTML = '<path d="M6 5h4v14H6zm8 0h4v14h-4z"/>';
+                status.textContent = 'Live';
+            }
+            if ('mediaSession' in navigator) {
+                navigator.mediaSession.playbackState = radioAudio.paused ? 'paused' : 'playing';
+            }
+        }
+
+        function radioTogglePlay(event) {
+            if (event) event.stopPropagation();
+            if (!radioAudio.src) {
+                loadRadioChannel(radioIndex, true);
+                return;
+            }
+            if (radioAudio.paused) {
+                radioAudio.play().catch(err => console.log("Radio play blocked:", err));
+            } else {
+                radioAudio.pause();
+            }
+        }
+
+        function radioNext(event) {
+            if (event) event.stopPropagation();
+            loadRadioChannel(radioIndex + 1, true);
+        }
+
+        function radioPrev(event) {
+            if (event) event.stopPropagation();
+            loadRadioChannel(radioIndex - 1, true);
+        }
+
+        radioAudio.addEventListener('playing', updateRadioPlayIcon);
+        radioAudio.addEventListener('pause', updateRadioPlayIcon);
+        radioAudio.addEventListener('waiting', () => {
+            document.getElementById('radio-status').textContent = 'Loading...';
+        });
+        radioAudio.addEventListener('error', () => {
+            document.getElementById('radio-status').textContent = 'Station unavailable';
+        });
+
+        if ('mediaSession' in navigator) {
+            navigator.mediaSession.setActionHandler('play', () => radioTogglePlay());
+            navigator.mediaSession.setActionHandler('pause', () => radioTogglePlay());
+            navigator.mediaSession.setActionHandler('previoustrack', () => radioPrev());
+            navigator.mediaSession.setActionHandler('nexttrack', () => radioNext());
+        }
+
+        // Switches between the Channels feed, Radio (placeholder), and
+        // Profile tabs. Leaving Channels pauses/unloads whatever's currently
+        // playing so audio doesn't keep running in the background while
+        // browsing another tab; returning to Channels resumes it via the
+        // normal updatePlayers() flow.
+        function switchTab(tab) {
+            document.getElementById('nav-channels').classList.toggle('active', tab === 'channels');
+            document.getElementById('nav-radio').classList.toggle('active', tab === 'radio');
+            document.getElementById('nav-profile').classList.toggle('active', tab === 'profile');
+
+            const radioView = document.getElementById('radio-view');
+            const profileView = document.getElementById('profile-view');
+
+            if (tab === 'channels') {
+                appContainer.style.display = '';
+                radioView.classList.remove('visible');
+                profileView.classList.remove('visible');
+                updatePlayers();
+            } else {
+                appContainer.style.display = 'none';
+                const video = document.getElementById(`video-${currentIndex}`);
+                const channel = uniqueChannels[currentIndex % uniqueChannels.length];
+                if (channel.type === 'iframe') {
+                    unloadVideo(currentIndex);
+                } else if (video) {
+                    video.pause();
+                }
+                radioView.classList.toggle('visible', tab === 'radio');
+                profileView.classList.toggle('visible', tab === 'profile');
+                if (tab === 'radio' && !radioAudio.src) loadRadioChannel(radioIndex, false);
+                if (tab === 'profile') renderFollowingList();
+            }
+        }
+
+        function renderFollowingList() {
+            const list = document.getElementById('following-list');
+            const ids = [...followedChannels];
+
+            if (ids.length === 0) {
+                list.innerHTML = `<div class="following-empty">You haven't followed any channels yet.<br>Tap "Follow" on a channel to add it here.</div>`;
+                return;
+            }
+
+            list.innerHTML = ids.map(id => {
+                const channel = uniqueChannels.find(c => c.id === id);
+                if (!channel) return '';
+                return `
+                    <div class="following-item" onclick="jumpToChannel(${id})">
+                        <img src="${channel.logo}" alt="${channel.name}" />
+                        <div>
+                            <div class="fi-name">${channel.name}</div>
+                            <div class="fi-category">${channel.category}</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Jumps back to the Channels tab, scrolled directly to the tapped
+        // followed channel.
+        function jumpToChannel(channelId) {
+            const middleBlock = Math.floor(LOOP_MULTIPLIER / 2) * uniqueChannels.length;
+            const pos = uniqueChannels.findIndex(c => c.id === channelId);
+            if (pos === -1) return;
+            currentIndex = middleBlock + pos;
+            switchTab('channels');
+            document.getElementById(`container-${currentIndex}`).scrollIntoView({ behavior: 'auto' });
+        }
+
+        initDOM();
+        document.getElementById(`container-${currentIndex}`).scrollIntoView();
+        setTimeout(() => { appContainer.style.scrollBehavior = 'smooth'; }, 100);
+        setupObserver();
+        updatePlayers();
+        showSwipeHintIfNeeded();
+
+    </script>
+</body>
+</html>
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; 
+            pointer-events: none;
+        }
+
+        /* Main UI Wrapper */
+        .ui-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: calc(30px + env(safe-area-inset-top)) 20px calc(108px + env(safe-area-inset-bottom));
+            background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 20%, transparent 80%, rgba(0,0,0,0.8) 100%);
+            z-index: 10;
+        }
+
+        .top-ui {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+
+        .live-badge {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            backdrop-filter: blur(4px);
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #ff2a2a;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 42, 42, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(255, 42, 42, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 42, 42, 0); }
+        }
+
+        .bottom-ui {
+            margin-bottom: 30px;
+            width: 75%; 
+        }
+
+        .channel-header-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 6px;
+        }
+
+        .channel-avatar-link {
+            display: block;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: 1.5px solid #fff;
+            overflow: hidden;
+            flex-shrink: 0;
+            background: #222;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            pointer-events: auto;
+        }
+
+        /* Bottom navigation bar */
+        .bottom-nav {
+            position: fixed;
+            left: 50%;
+            /* Extra clearance by default - mobile Safari/Chrome's own
+               floating bottom toolbar isn't accounted for by
+               safe-area-inset-bottom, so this needs real headroom on top
+               of it to avoid sitting behind that browser chrome. */
+            bottom: calc(0px + env(safe-area-inset-bottom));
+            transform: translateX(-50%);
+            display: flex;
+            gap: 4px;
+            background: rgba(20,20,20,0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 28px;
+            padding: 5px;
+            z-index: 50;
+            pointer-events: auto;
+        }
+
+        /* Installed as an app (Add to Home Screen) - no browser chrome to
+           avoid, so sit close to the bottom edge instead. */
+        @media (display-mode: standalone), (display-mode: fullscreen), (display-mode: minimal-ui) {
+            .bottom-nav {
+                bottom: calc(14px + env(safe-area-inset-bottom));
+            }
+        }
+
+        .nav-btn {
+            width: 50px;
+            height: 42px;
+            border: none;
+            background: transparent;
+            color: rgba(255,255,255,0.55);
+            border-radius: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .nav-btn svg {
+            width: 23px;
+            height: 23px;
+        }
+
+        .nav-btn.active {
+            color: #000;
+            background: #fff;
+        }
+
+        /* Radio / Profile full-screen views */
+        .side-view {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            z-index: 40;
+            display: none;
+            flex-direction: column;
+            padding: calc(24px + env(safe-area-inset-top)) 20px calc(100px + env(safe-area-inset-bottom));
+            overflow-y: auto;
+            color: #fff;
+        }
+
+        .side-view.visible {
+            display: flex;
+        }
+
+        .side-view-header h2 {
+            font-size: 22px;
+            margin: 10px 0 20px;
+        }
+
+        #radio-view {
+            background: linear-gradient(135deg, #00f2ea, #ff0050);
+        }
+
         #radio-view .side-view-placeholder {
             color: #fff;
             text-shadow: 0 2px 8px rgba(0,0,0,0.45);
